@@ -1,0 +1,735 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Yundera Limitless PC Project</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1cbe0e14-49bc-8046-af53-e4056d20747e" class="page sans"><header><h1 class="page-title">Yundera Limitless PC Project</h1><p class="page-description"></p></header><div class="page-body"><p id="1cbe0e14-49bc-8063-bdfd-e792c2dd1f73" class="">by Jason Sohn</p><h1 id="1cbe0e14-49bc-8002-9770-c4f0eaa9f6d5" class=""><strong>Executive Summary</strong></h1><p id="1cbe0e14-49bc-801b-ba06-d2af6695e55b" class="">This report outlines the successful development of a proof-of-concept VM that enables <strong>zero-downtime vertical scaling of virtual machines</strong>, a feature currently unavailable on mainstream cloud platforms. Built for Yundera’s user-centric model, the solution leverages open-source technologies (<strong>Proxmox VE</strong> for virtualization and <strong>Ceph</strong> for distributed storage) deployed on bare-metal servers from Scaleway.</p><p id="1cbe0e14-49bc-8001-8d6a-c6aa8460312e" class="">The proof of concept demonstrates that computing resources such as CPU, memory, and storage can be dynamically scaled without interrupting user workloads, paving the way for a &quot;limitless PC&quot; experience. Key advantages include lower vendor lock-in, cost-efficiency, and operational flexibility. The project also shows that live migration across servers is not only viable but nearly imperceptible to users.</p><p id="1cbe0e14-49bc-8078-bf58-c46eb8a82a81" class="">Based on these findings, the report recommends progressing toward production by implementing infrastructure-as-code, usage-based billing, and enhanced security measures. This positions Yundera to offer a unique, scalable alternative to traditional cloud computing.</p><h1 id="1cbe0e14-49bc-8055-8398-c5808ba2b4b1" class="">Background</h1><p id="1cbe0e14-49bc-80e8-a219-e2ecc2511748" class="">
+</p><h2 id="1cbe0e14-49bc-8085-a7a8-de50d3c5862f" class="">State of the Public Cloud</h2><figure id="1cbe0e14-49bc-8075-8a48-cad438748603" class="image"><a href="report-assets/cloud-vendor-lockin-transparent.png"><img style="width:336px" src="report-assets/cloud-vendor-lockin-transparent.png"/></a></figure><p id="1cbe0e14-49bc-8053-b033-c3902fc876a2" class="">No public cloud provider offers zero-downtime vertical scaling of VMs. While technical and historical factors play a role, the most compelling explanation lies in misaligned business incentives. Cloud providers have subtly fostered vendor lock-in by encouraging companies to invest engineering resources in specialized code tailored for horizontal scaling ecosystem products. Furthermore, cloud vendors have little incentive to offer live vertical scaling for VMs, as they can promote more profitable products, such as AWS Lambda, which require vendor-specific development efforts.</p><p id="1cbe0e14-49bc-80cf-b180-ebcf3c2df6fe" class="">
+</p><h2 id="1cbe0e14-49bc-8005-a637-d156557a98b1" class="">Yundera’s Unique Offering</h2><figure id="1cbe0e14-49bc-8056-9be2-fcab66a23fd7" class="image"><a href="report-assets/yundera-yay.png"><img style="width:240px" src="report-assets/yundera-yay.png"/></a></figure><p id="1cbe0e14-49bc-8032-b342-df37d357240f" class="">Yundera is built on a more focused tech stack and has a different incentive structure than commodity cloud providers, which opens up an opportunity to provide true pay-as-you-go service. </p><h2 id="1cbe0e14-49bc-805e-8ae1-dca6e6174646" class="">Approaches Considered</h2><hr id="1cbe0e14-49bc-8060-b2db-c29ef810665c"/><h3 id="1cbe0e14-49bc-8070-a3e6-e4af953d01fd" class=""><strong>Commercial Cloud VM Migration (Blue-Green Deployment)</strong></h3><p id="1cbe0e14-49bc-80e2-8d86-d5fd439af2f7" class="">Using a commercial cloud provider’s tools, we could automate a VM backup, duplication, and restore workflow.</p><div id="1cbe0e14-49bc-800f-b00a-d3350ca4cd63" class="column-list"><div id="1cbe0e14-49bc-80be-9df7-daaa1140f951" style="width:50%" class="column"><p id="1cbe0e14-49bc-80c5-9ff7-d9ca3101d12a" class=""><mark class="highlight-teal"><strong>Pros</strong></mark></p><ul id="1cbe0e14-49bc-8076-a711-f6252c4acbd8" class="bulleted-list"><li style="list-style-type:disc">Architectural simplicity: We do not create any additional abstraction layers.</li></ul><ul id="1cbe0e14-49bc-8082-9425-cfce7dbd221e" class="bulleted-list"><li style="list-style-type:disc">No need to provision extra resources - this is handled by the cloud provider</li></ul><p id="1cbe0e14-49bc-80b7-8385-f537824f555f" class="">
+</p></div><div id="1cbe0e14-49bc-80cc-94d7-f6f297785cd7" style="width:50%" class="column"><p id="1cbe0e14-49bc-8066-84a0-c642f15f7508" class=""><mark class="highlight-red"><strong>Cons</strong></mark></p><ul id="1cbe0e14-49bc-80da-a2bb-fd36a6f83b60" class="bulleted-list"><li style="list-style-type:disc">Vendor lock-in</li></ul><ul id="1cbe0e14-49bc-8036-81a8-d55485c44704" class="bulleted-list"><li style="list-style-type:disc">Noticeable interruption to end user because the change is not in-place.</li></ul><ul id="1cbe0e14-49bc-8057-a74d-e8e9af2f51eb" class="bulleted-list"><li style="list-style-type:disc">Limited customizability.</li></ul><ul id="1cbe0e14-49bc-803f-8ff3-ddee5c96b3ef" class="bulleted-list"><li style="list-style-type:disc">Does not provide a truly &#x27;limitless PC&#x27; experience.</li></ul></div></div><hr id="1cbe0e14-49bc-801f-8d27-e2eb0637eb3a"/><h3 id="1cbe0e14-49bc-801e-9977-c1d6112201b7" class=""><strong>OpenStack</strong></h3><div id="1cbe0e14-49bc-8000-9a31-d1c03be59e52" class="column-list"><div id="1cbe0e14-49bc-80e0-aab6-f9f176234559" style="width:50%" class="column"><p id="1cbe0e14-49bc-8027-963d-e7e7057a4ba0" class=""><mark class="highlight-teal"><strong>Pros</strong></mark></p><ul id="1cbe0e14-49bc-801e-a425-e24cb69f98ad" class="bulleted-list"><li style="list-style-type:disc">OpenStack provides a platform for building a large-scale, AWS-like, self-service cloud.</li></ul><p id="1cbe0e14-49bc-8070-8048-fe2eeabc9302" class="">
+</p></div><div id="1cbe0e14-49bc-8022-ac2e-c918820a571d" style="width:50%" class="column"><p id="1cbe0e14-49bc-807c-8da0-e697b0ba8882" class=""><mark class="highlight-red"><strong>Cons</strong></mark></p><ul id="1cbe0e14-49bc-807b-bde1-f4e55ac13d76" class="bulleted-list"><li style="list-style-type:disc">Complex, steep learning curve, heavy infrastructure footprint.</li></ul><ul id="1cbe0e14-49bc-80a3-bd23-c7b29a4a9610" class="bulleted-list"><li style="list-style-type:disc">Assumes a large technical team will build and manage the infrastructure.</li></ul><ul id="1cbe0e14-49bc-8051-8e5d-c1f555960084" class="bulleted-list"><li style="list-style-type:disc">Live CPU/RAM resizing will “never be implemented”.[1][2] </li></ul></div></div><hr id="1cbe0e14-49bc-80c8-a285-fe28a8f3e57f"/><h3 id="1cbe0e14-49bc-8087-b9e9-f173c273efc4" class=""><strong>oVirt</strong></h3><div id="1cbe0e14-49bc-80ed-831f-d93389a2c875" class="column-list"><div id="1cbe0e14-49bc-800c-b8e4-f38419c9dc72" style="width:50%" class="column"><p id="1cbe0e14-49bc-805f-8a9b-d95c362f8c6c" class=""><mark class="highlight-teal"><strong>Pros</strong></mark></p><ul id="1cbe0e14-49bc-801b-a558-eecc168614d6" class="bulleted-list"><li style="list-style-type:disc">Similar in many ways to Proxmox</li></ul><ul id="1cbe0e14-49bc-80ee-a94d-cbcb8f8763cc" class="bulleted-list"><li style="list-style-type:disc">Free and open source</li></ul><p id="1cbe0e14-49bc-8027-810b-e8a144ab7ca8" class="">
+</p></div><div id="1cbe0e14-49bc-8053-bba1-c39109225252" style="width:50%" class="column"><p id="1cbe0e14-49bc-8023-be8b-f62b23c956a2" class=""><mark class="highlight-red"><strong>Cons</strong></mark></p><ul id="1cbe0e14-49bc-80af-b8cf-d7f786009a4f" class="bulleted-list"><li style="list-style-type:disc">Smaller community</li></ul><ul id="1cbe0e14-49bc-800b-b60c-cabaf7f1cafe" class="bulleted-list"><li style="list-style-type:disc">Requires dedicated management node</li></ul><ul id="1cbe0e14-49bc-8043-b30c-cb9f508eeed9" class="bulleted-list"><li style="list-style-type:disc">No option for enterprise support</li></ul><ul id="1cbe0e14-49bc-80e4-82e6-ff6057ce2f1b" class="bulleted-list"><li style="list-style-type:disc">No built-in container support</li></ul></div></div><hr id="1cbe0e14-49bc-80b5-a99e-da440e941079"/><p id="1cbe0e14-49bc-8013-ba46-eeda65ec3fc8" class="">
+</p><p id="1cbe0e14-49bc-80dd-a3af-fe2c0fb79e71" class="">
+</p><h2 id="1cbe0e14-49bc-805f-bf79-f1041af4d226" class="">Approach Selected</h2><figure id="1cbe0e14-49bc-8012-9417-f374e64c067b" class="image"><a href="report-assets/5292f4e6-fe69-406e-ba29-f30350c0a480.png"><img style="width:384px" src="report-assets/5292f4e6-fe69-406e-ba29-f30350c0a480.png"/></a></figure><p id="1cbe0e14-49bc-80a7-900f-e9c1a4fcd193" class="">Proxmox VE and Ceph were chosen as the most promising path towards building a limitless PC service that is scalable to 1000 users and beyond.</p><p id="1cbe0e14-49bc-8085-a53f-d6e61d9de11e" class=""><strong>Proxmox VE</strong> is an open-source hypervisor for both VMs and containers. It supports in-place VM scaling, a key requirement, with only minor modifications to host and VM configurations.</p><div id="1cbe0e14-49bc-808a-9097-c1e8bd9ee886" class="column-list"><div id="1cbe0e14-49bc-8040-8459-ff0ce99409b8" style="width:50%" class="column"><p id="1cbe0e14-49bc-8013-95f2-da060011f377" class=""><mark class="highlight-teal"><strong>Proxmox Benefits</strong></mark></p><ul id="1cbe0e14-49bc-809e-a5f2-dbbf0df5e647" class="bulleted-list"><li style="list-style-type:disc">Open-source and free</li></ul><ul id="1cbe0e14-49bc-803b-a81d-ef2e007ee0b5" class="bulleted-list"><li style="list-style-type:disc">KVM (VMs) and LXC (containers) support</li></ul><ul id="1cbe0e14-49bc-8094-aa54-cb170ed8413d" class="bulleted-list"><li style="list-style-type:disc">User-friendly web interface</li></ul><ul id="1cbe0e14-49bc-8045-8595-fa50c4661ef9" class="bulleted-list"><li style="list-style-type:disc">Cluster management built-in</li></ul><ul id="1cbe0e14-49bc-80af-a573-ca70f266ca25" class="bulleted-list"><li style="list-style-type:disc">Strong and active community</li></ul></div><div id="1cbe0e14-49bc-807d-9ce6-cff0812f2428" style="width:50%" class="column"><p id="1cbe0e14-49bc-80a1-94ed-f566a3940c3a" class=""><mark class="highlight-red"><strong>Proxmox Costs / Considerations</strong></mark></p><ul id="1cbe0e14-49bc-80c0-9c5f-cb8095cfcca7" class="bulleted-list"><li style="list-style-type:disc">Optional enterprise license</li></ul><ul id="1cbe0e14-49bc-805e-be81-f0eb243ecbef" class="bulleted-list"><li style="list-style-type:disc">Administration requires familiarity with Linux concepts (all of the above options do too)</li></ul><p id="1cbe0e14-49bc-80f8-9891-fd7b358458cc" class="">
+</p></div></div><p id="1cbe0e14-49bc-8015-b317-fabb2b7021bc" class=""><strong>Ceph</strong> is an open-source distributed file system that is suitable for VM system file storage. It is the default option for pooled storage for a Proxmox cluster. For simplicity, all three nodes are members of both the Proxmox and Ceph clusters. Separating these clusters onto dedicated machines is possible in theory, but not explored here.</p><div id="1cbe0e14-49bc-80c5-b46c-c2a9e57945f3" class="column-list"><div id="1cbe0e14-49bc-80d3-9954-e4ce31ce36c9" style="width:50%" class="column"><p id="1cbe0e14-49bc-807c-a168-df72966e1a73" class=""><mark class="highlight-teal"><strong>Ceph Benefits</strong></mark></p><ul id="1cbe0e14-49bc-8096-91ee-e7d8b398e262" class="bulleted-list"><li style="list-style-type:disc">Built for hyper-converged architecture</li></ul><ul id="1cbe0e14-49bc-8097-8126-d446bae14a72" class="bulleted-list"><li style="list-style-type:disc">First-class Proxmox integration.</li></ul><ul id="1cbe0e14-49bc-80dd-bd54-d67118526c9d" class="bulleted-list"><li style="list-style-type:disc">Enables sub-second VM migrations across hosts by eliminating the need to copy VM images.</li></ul></div><div id="1cbe0e14-49bc-806e-99fe-c0a4726e89e7" style="width:50%" class="column"><p id="1cbe0e14-49bc-805b-8725-c43f424d4af9" class=""><mark class="highlight-red"><strong>Ceph Costs / Considerations</strong></mark></p><ul id="1cbe0e14-49bc-8068-b490-cd8f00f64d41" class="bulleted-list"><li style="list-style-type:disc">Greater demand on the network - SSDs can easily saturate 10 GbE, causing the network to become the bottleneck.</li></ul><ul id="1cbe0e14-49bc-808b-906c-cc5de2070fd3" class="bulleted-list"><li style="list-style-type:disc">Requires some technical knowledge and familiarity with Ceph-specific concepts to set up and maintain.</li></ul><p id="1cbe0e14-49bc-80e1-a17e-d495170482d7" class="">
+</p></div></div><h1 id="1cbe0e14-49bc-8071-9773-deee3882a6db" class="">Setup</h1><p id="1cbe0e14-49bc-804e-b854-e4f3db6663cd" class="">
+</p><p id="1cbe0e14-49bc-8084-a2e2-d449398d0e2b" class="">
+</p><h1 id="1cbe0e14-49bc-80c7-83df-ef5801046f11" class="">Try the Proof of Concept VM</h1><p id="1cbe0e14-49bc-8008-9c94-d54c292bcbc2" class="">
+</p><p id="1cbe0e14-49bc-8084-bde8-cacf6e9ac103" class="">Open the proof-of-concept demo:</p><p id="1cbe0e14-49bc-80e0-98d1-ea17da52e8e2" class=""><mark class="highlight-default"><mark class="highlight-default_background"><a href="https://yundera-limitless-pc-demo.tensorturtle.com">https://yundera-limitless-pc-demo.tensorturtle.com</a></mark></mark></p><p id="1cbe0e14-49bc-8089-a375-dbdb38d0ab11" class="">
+</p><figure id="1cbe0e14-49bc-80e4-b52f-cc26fe4d1d11" class="image"><a href="report-assets/Screenshot_2025-04-05_at_01.24.43.png"><img style="width:709.984375px" src="report-assets/Screenshot_2025-04-05_at_01.24.43.png"/></a></figure><p id="1cbe0e14-49bc-801b-8b46-c026c95bfd10" class="">
+</p><p id="1cbe0e14-49bc-80a5-9ebc-c217b73c88e5" class="">Username: <code>yundera-developer</code></p><p id="1cbe0e14-49bc-804a-b2be-c5a5de4c8271" class="">Password: Please contact me directly for POC VM password.</p><p id="1cbe0e14-49bc-80c4-991b-f3a5c5e1a5c7" class="">
+</p><figure id="1cbe0e14-49bc-802a-8bc8-f257771af26c" class="image"><a href="report-assets/Screenshot_2025-04-05_at_01.25.37.png"><img style="width:709.984375px" src="report-assets/Screenshot_2025-04-05_at_01.25.37.png"/></a></figure><h2 id="1cbe0e14-49bc-805d-885b-ff0ec6abedd8" class="">Backblaze Mount</h2><p id="1cbe0e14-49bc-8016-a994-f333abc5677a" class="">Open ‘Files’. A demo ‘Backblaze_B2’ bucket is automatically mounted at boot.</p><p id="1cbe0e14-49bc-802c-bfcf-cd4d487b1cc8" class="">
+</p><figure id="1cbe0e14-49bc-8055-81ff-dc7f357b12b8" class="image"><a href="report-assets/Screenshot_2025-04-05_at_01.26.37.png"><img style="width:709.984375px" src="report-assets/Screenshot_2025-04-05_at_01.26.37.png"/></a></figure><p id="1cbe0e14-49bc-80a9-b4c1-c9b300a22672" class="">This gives users intuitive, easy-to-use access to the practically infinite Backblaze storage.</p><p id="1cbe0e14-49bc-807f-aff2-c272a6aaf871" class="">Try downloading / uploading files to this Backblaze B2 mount.</p><p id="1cbe0e14-49bc-8095-99c9-dc5c9df4e991" class="">
+</p><figure id="1cbe0e14-49bc-800e-a543-df3c16cd48bb" class="image"><a href="report-assets/Screenshot_2025-04-05_at_01.28.03.png"><img style="width:709.984375px" src="report-assets/Screenshot_2025-04-05_at_01.28.03.png"/></a></figure><p id="1cbe0e14-49bc-80b0-87f6-ef822c4d6b3e" class="">
+</p><h2 id="1cbe0e14-49bc-80ae-a438-d934f2ce415c" class="">Live CPU/RAM Scaling</h2><p id="1cbe0e14-49bc-806f-bb1d-c3d0b5ddcb8a" class="">This is the exciting part. From the CasaOS home, open the <code>btop</code> application. This is a system monitoring application. </p><p id="1cbe0e14-49bc-8052-a1cc-f3575374dc76" class="">
+</p><figure id="1cbe0e14-49bc-8026-833f-eca85e6f71da" class="image"><a href="report-assets/Screenshot_2025-04-05_at_01.29.52.png"><img style="width:709.984375px" src="report-assets/Screenshot_2025-04-05_at_01.29.52.png"/></a></figure><p id="1cbe0e14-49bc-80f8-ad60-d4a30114de5f" class="">
+</p><p id="1cbe0e14-49bc-8098-b28f-f40f50d7c288" class=""><code>btop</code> shows us CPU (upper right) and RAM (left center), among other stats.</p><figure id="1cbe0e14-49bc-80a6-ad4c-ea3b415d6381" class="image"><a href="report-assets/Screenshot_2025-04-05_at_01.30.10.png"><img style="width:709.984375px" src="report-assets/Screenshot_2025-04-05_at_01.30.10.png"/></a></figure><p id="1cbe0e14-49bc-8018-9c37-fcf1ab09372a" class="">
+</p><p id="1cbe0e14-49bc-80cd-8bbf-db476d36327c" class="">With <code>btop</code> open in one window, log into the Proxmox cluster web UI in another window:</p><p id="1cbe0e14-49bc-8080-8b56-fb80bad64729" class=""><a href="https://163.172.68.57:8006/">https://163.172.68.57:8006</a></p><p id="1cbe0e14-49bc-80f7-8aa5-e33f7cc4280a" class="">
+</p><p id="1cbe0e14-49bc-8067-ba3c-e00dba44415b" class="">Since the Proxmox is clustered, you can access the same web UI from the other two servers too:</p><p id="1cbe0e14-49bc-8041-a767-fb3d94dc6925" class=""><a href="https://163.172.68.59:8006/">https://163.172.68.59:8006</a></p><p id="1cbe0e14-49bc-80be-97b3-ead3d9aaed50" class=""><a href="https://163.172.68.106:8006/">https://163.172.68.106:8006</a></p><p id="1cbe0e14-49bc-8034-ab54-ca5990a6277f" class="">
+</p><p id="1cbe0e14-49bc-800a-a400-e689e72c9ffe" class="">You can safely ignore the warning. It occurs simply because Proxmox web UI uses a self-signed TLS. It is safe to continue and we can remove this warning later.</p><p id="1cbe0e14-49bc-806d-b068-d16a903d765a" class="">
+</p><p id="1cbe0e14-49bc-8071-a47a-e1543408be71" class="">On Chrome, click on <code>Advanced</code> and then click on <code>Proceed to 163.172.68.57 (unsafe)</code></p><figure id="1cbe0e14-49bc-80b2-9c29-dc7a5bfea717" class="image"><a href="report-assets/Screenshot_2025-04-02_at_17.26.10.png"><img style="width:709.9921875px" src="report-assets/Screenshot_2025-04-02_at_17.26.10.png"/></a></figure><p id="1cbe0e14-49bc-808a-9176-e37df2eedb24" class="">On Firefox, click on <code>Advanced</code>and then <code>Accept the Risk and Continue</code>.</p><figure id="1cbe0e14-49bc-80fc-ae96-cdd4fda60c95" class="image"><a href="report-assets/Screenshot_2025-04-02_at_17.25.41.png"><img style="width:2468px" src="report-assets/Screenshot_2025-04-02_at_17.25.41.png"/></a></figure><p id="1cbe0e14-49bc-8092-bfb1-cac06a27c06f" class="">
+</p><p id="1cbe0e14-49bc-80ef-b995-c5001664e21f" class="">The user name is <code>root</code></p><p id="1cbe0e14-49bc-808d-9833-c9bc04a23328" class="">Contact me directly for the Proxmox cluster passwords.</p><figure id="1cbe0e14-49bc-805b-b6e6-d271abb3625a" class="image"><a href="report-assets/Screenshot_2025-04-02_at_17.30.04.png"><img style="width:709.9921875px" src="report-assets/Screenshot_2025-04-02_at_17.30.04.png"/></a></figure><p id="1cbe0e14-49bc-8071-8673-c0b392aec1e7" class="">
+</p><p id="1cbe0e14-49bc-808f-9112-e0c4e76dce7b" class="">Acknowledge the “No valid subscription” alert. All Proxmox features are free but the developers recommend us to buy a support plan from them, which provides access to one of their engineers.</p><figure id="1cbe0e14-49bc-80f1-8976-fa90cfbb7fe9" class="image"><a href="report-assets/Screenshot_2025-04-02_at_17.30.12.png"><img style="width:2496px" src="report-assets/Screenshot_2025-04-02_at_17.30.12.png"/></a></figure><p id="1cbe0e14-49bc-80d2-9b8f-ca83a97c8a6e" class="">
+</p><p id="1cbe0e14-49bc-806e-b7af-f96f3c09f223" class="">Navigate to the <code>limitless-casaos-demo</code> VM. Then go to ‘Hardware’ tab.</p><p id="1cbe0e14-49bc-807c-a337-f5662b2c3153" class="">
+</p><figure id="1cbe0e14-49bc-80ad-9e89-e72545d5b5d3" class="image"><a href="report-assets/Screenshot_2025-04-05_at_01.35.13.png"><img style="width:709.984375px" src="report-assets/Screenshot_2025-04-05_at_01.35.13.png"/></a></figure><p id="1cbe0e14-49bc-805d-8a01-e8bd8881aef6" class="">
+</p><p id="1cbe0e14-49bc-8089-94ec-d0098f5adfbf" class=""><strong>Add RAM</strong>: Simply double click on ‘Memory’ and change it to something bigger, like 8000 MB.</p><p id="1cbe0e14-49bc-8035-abbd-fa8fd00b75d2" class="">In the <code>btop</code> window, you should see that the total RAM instantly increased. Adding RAM is an instant change, so you might miss it if you blink.</p><p id="1cbe0e14-49bc-8007-a6d4-dd1ac8c78a68" class="">
+</p><div id="1cbe0e14-49bc-80f3-954a-c32c8f628243" class="column-list"><div id="1cbe0e14-49bc-8099-b127-e5acea57be83" style="width:50%" class="column"><figure id="1cbe0e14-49bc-8078-9b03-ccb9f06589c8" class="image"><a href="report-assets/Screenshot_2025-04-05_at_01.37.03.png"><img style="width:720px" src="report-assets/Screenshot_2025-04-05_at_01.37.03.png"/></a></figure></div><div id="1cbe0e14-49bc-80bb-ad6c-c097dd8c4326" style="width:50%" class="column"><figure id="1cbe0e14-49bc-8051-8d5e-e5972a58d2f7" class="image"><a href="report-assets/Screenshot_2025-04-05_at_01.37.54.png"><img style="width:288px" src="report-assets/Screenshot_2025-04-05_at_01.37.54.png"/></a></figure></div></div><p id="1cbe0e14-49bc-8072-9c27-ec89bc2ac705" class="">
+</p><p id="1cbe0e14-49bc-80c5-a44b-db7dcfe82e89" class=""><strong>Remove RAM</strong>: Similarly, edit the ‘Memory’ back to 4000 MB. This time, the change won’t be instant because the hypervisor slowly and carefully reclaims unused memory. As a rule of thumb, it takes around 1 second per GB of memory to be freed. If you request more memory to be removed than is possible, the operation won’t complete.</p><p id="1cbe0e14-49bc-80dc-96ab-dddb8e61a4c0" class="">
+</p><p id="1cbe0e14-49bc-8096-bdb1-c2153fce2d47" class="">
+</p><p id="1cbe0e14-49bc-8003-ae35-ee6fcb767c2f" class=""><strong>Add CPU</strong>: Edit ‘Processors’. We want to change the ‘VCPUs’ field, not the ‘Cores’ field. Try changing it to 8 VCPUs and click OK.</p><p id="1cbe0e14-49bc-8054-8f6d-c1bbeff1d5ce" class="">Refresh the <code>btop</code> page, and you’ll see that more cores have been added. Adding CPUs is actually instantaneous, but almost all system monitoring applications need to be refreshed to show the new core count.</p><figure id="1cbe0e14-49bc-80f9-b57b-c07c07948a1c" class="image"><a href="report-assets/Screenshot_2025-04-05_at_01.41.08.png"><img style="width:709.984375px" src="report-assets/Screenshot_2025-04-05_at_01.41.08.png"/></a></figure><p id="1cbe0e14-49bc-80ae-8aab-ffc978be7245" class="">
+</p><p id="1cbe0e14-49bc-80c3-b2f5-c830017f0561" class=""><strong>Remove CPU</strong>: In Proxmox, reset the VCPUs count back to 4. Removing CPUs is quite fast but not instantaneous because the CPU has to move processes from the cores that will be removed. The rule of thumb is 0.5 seconds per core. Refresh the VM’s <code>btop</code> window to see the new core count.</p><p id="1cbe0e14-49bc-8018-a438-e4ff1ba10c60" class="">
+</p><h1 id="1cbe0e14-49bc-80f8-b67f-caa819b892ef" class="">Results</h1><p id="1cbe0e14-49bc-8067-b135-e902d854f5aa" class="">
+</p><h2 id="1cbe0e14-49bc-802c-a3a1-d73c5da1800f" class="">Hot-Plugging Capabilities</h2><p id="1cbe0e14-49bc-8059-9093-d9344b827e4a" class="">Our experiments demonstrate that our multi-node Proxmox cluster with Ceph storage can be dynamically scaled in any dimension (CPU, RAM, storage) with minimal interruption under most circumstances.</p><p id="1cbe0e14-49bc-80db-afca-d9637d7cd10f" class="">
+</p><table id="1cbe0e14-49bc-8090-933f-c0412dc18e1b" class="simple-table"><tbody><tr id="1cbe0e14-49bc-808f-97c3-fb16d2fd8cce"><td id="Ulgm" class="" style="width:136px">Resource</td><td id="WDWN" class="" style="width:122px">Scaling Direction</td><td id="jja?" class="" style="width:88px">Always possible</td><td id="{&gt;dF" class="" style="width:218px">Scaling Limits</td><td id="gZ}s" class="" style="width:131px">Speed</td><td id="^IMH" class="" style="width:209px">Possible Workarounds</td></tr><tr id="1cbe0e14-49bc-80ad-9f50-c4fae00323b0"><td id="Ulgm" class="" style="width:136px">CPU</td><td id="WDWN" class="" style="width:122px">Add Cores</td><td id="jja?" class="" style="width:88px"><strong>✅</strong></td><td id="{&gt;dF" class="" style="width:218px">Cannot exceed number of remaining cores in the physical host. The maximum must be set before VM startup.</td><td id="gZ}s" class="" style="width:131px">Instant</td><td id="^IMH" class="" style="width:209px"></td></tr><tr id="1cbe0e14-49bc-8002-bf60-ea63d601b8d4"><td id="Ulgm" class="" style="width:136px"></td><td id="WDWN" class="" style="width:122px">Remove Cores</td><td id="jja?" class="" style="width:88px"><strong>✅</strong></td><td id="{&gt;dF" class="" style="width:218px"></td><td id="gZ}s" class="" style="width:131px">~1 second per core - OS needs to move processes</td><td id="^IMH" class="" style="width:209px"></td></tr><tr id="1cbe0e14-49bc-8068-a7d0-ce90679af9a6"><td id="Ulgm" class="" style="width:136px">RAM</td><td id="WDWN" class="" style="width:122px">Add RAM</td><td id="jja?" class="" style="width:88px"><strong>✅</strong></td><td id="{&gt;dF" class="" style="width:218px">Cannot exceed host RAM</td><td id="gZ}s" class="" style="width:131px">Instant</td><td id="^IMH" class="" style="width:209px"></td></tr><tr id="1cbe0e14-49bc-8003-9e2c-f2233d023dec"><td id="Ulgm" class="" style="width:136px"></td><td id="WDWN" class="" style="width:122px">Remove RAM</td><td id="jja?" class="" style="width:88px"><strong>🟠</strong></td><td id="{&gt;dF" class="" style="width:218px">Operation can fail if current RAM usage is greater than target RAM.</td><td id="gZ}s" class="" style="width:131px">~1 second per GB of RAM shrunk (Ballooning process)</td><td id="^IMH" class="" style="width:209px">Verify that current RAM usage is below target size before allowing this operation.</td></tr><tr id="1cbe0e14-49bc-80cd-a4c2-c651877e8101"><td id="Ulgm" class="" style="width:136px">Boot Disk</td><td id="WDWN" class="" style="width:122px">Increase Size</td><td id="jja?" class="" style="width:88px"><strong>🟠</strong></td><td id="{&gt;dF" class="" style="width:218px">Expanding boot disk is possible, but the boot partition cannot be changed without careful operations and rebooting.</td><td id="gZ}s" class="" style="width:131px"></td><td id="^IMH" class="" style="width:209px">Create a new (non-boot) partition for expanded storage on boot disk.</td></tr><tr id="1cbe0e14-49bc-802e-a264-c8496ee17075"><td id="Ulgm" class="" style="width:136px"></td><td id="WDWN" class="" style="width:122px">Decrease Size</td><td id="jja?" class="" style="width:88px"><strong>❌</strong></td><td id="{&gt;dF" class="" style="width:218px">Not possible.</td><td id="gZ}s" class="" style="width:131px"></td><td id="^IMH" class="" style="width:209px"></td></tr><tr id="1cbe0e14-49bc-80e8-9ad1-d7bbceeb536e"><td id="Ulgm" class="" style="width:136px">Remote Disk (S3)</td><td id="WDWN" class="" style="width:122px">Mount</td><td id="jja?" class="" style="width:88px"><strong>✅</strong></td><td id="{&gt;dF" class="" style="width:218px"></td><td id="gZ}s" class="" style="width:131px">Instant</td><td id="^IMH" class="" style="width:209px"></td></tr><tr id="1cbe0e14-49bc-806c-bd3d-da3cff0e488f"><td id="Ulgm" class="" style="width:136px"></td><td id="WDWN" class="" style="width:122px">Unmount</td><td id="jja?" class="" style="width:88px"><strong>✅</strong></td><td id="{&gt;dF" class="" style="width:218px">Can’t unmount if currently being written to</td><td id="gZ}s" class="" style="width:131px">Instant</td><td id="^IMH" class="" style="width:209px"></td></tr></tbody></table><h2 id="1cbe0e14-49bc-802a-9e19-fd81cdc3bba9" class="">Cross-Host VM Migration</h2><p id="1cbe0e14-49bc-8048-af9c-d0e49a31a5a6" class="">In cases where the current host does not have sufficient headroom to accommodate a more resource-intensive VM, it will need to be migrated to another host.</p><p id="1cbe0e14-49bc-8035-b26e-ddab21c2c966" class="">We demonstrate sub-second migration and full state persistence during cross-host VM migration.</p><p id="1cbe0e14-49bc-802c-9307-dd4ceec9b559" class="">When connected via SSH, the unresponsiveness during migration is imperceptible.</p><p id="1cbe0e14-49bc-8044-a06d-ff8150404401" class="">CasaOS experiences approximately 10-30 seconds of unresponsiveness, likely due to differences in how CasaOS handles the network interruption compared to the underlying network stack.</p><p id="1cbe0e14-49bc-8012-bb34-c1ee0690e81a" class="">Using <code><strong>scp</strong></code> to copy a file over the internet, the VM experiences a 5-15 second stall during migration, but the transfer resumes and completes successfully even through multiple migrations.</p><h1 id="1cbe0e14-49bc-8049-b48b-f3be9cda284f" class="">Analysis and Discussion</h1><p id="1cbe0e14-49bc-801f-912e-d5c7d204152b" class="">
+</p><h2 id="1cbe0e14-49bc-80ea-aa08-f1f552f8f490" class="">Performance</h2><h3 id="1cbe0e14-49bc-800a-a71f-fd6d7e0bdb81" class="">Host-to-host Measurements</h3><p id="1cbe0e14-49bc-80f5-98d3-c0b76b0ac04e" class="">In our POC cluster, three servers were located within the same rack (as indicated by the Scaleway console), and shared a IPv4 gateway. The specifics of the networking is opaque to us, but we can make a safe guess that they were all wired up to a L2 switch, and therefore could communicate directly. </p><p id="1cbe0e14-49bc-8071-9c59-eca91f81ef5c" class="">
+</p><p id="1cbe0e14-49bc-80d4-82ea-ef37809cb669" class="">The following correlation matrix shows that ping times were consistently low and well under the 5ms maximum required for a Proxmox cluster[3]. Host-to-host ping times should be measured in this manner for all deployments. Furthermore, it is recommended to use a physically separate network card or interface for Corosync (the real-time synchronization engine), and further work is needed to configure dual-NIC servers in this way and stress-test the cluster.</p><p id="1cbe0e14-49bc-8017-9ac3-e7e10d9f1a34" class="">
+</p><figure id="1cbe0e14-49bc-80e8-bb2b-d3654c88ee04" class="image"><a href="report-assets/ping_matrix.png"><img style="width:640px" src="report-assets/ping_matrix.png"/></a></figure><p id="1cbe0e14-49bc-804e-94ab-f8e76eb641e2" class="">
+</p><p id="1cbe0e14-49bc-80fb-885d-cde887fad278" class="">Similarly, the measured throughput showed nearly ideal performance for a 1Gbps network interface. The diagonal is the loopback interface, which is much faster than external networking as expected.</p><p id="1cbe0e14-49bc-80c9-8e8d-c02601ccc072" class="">
+</p><figure id="1cbe0e14-49bc-802b-a6fd-c3a284dc40f2" class="image"><a href="report-assets/iperf_matrix.png"><img style="width:640px" src="report-assets/iperf_matrix.png"/></a></figure><p id="1cbe0e14-49bc-808f-a603-c2239a71aeeb" class="">
+</p><h3 id="1cbe0e14-49bc-8007-adfb-f4614857caec" class="">Native vs. Ceph vs. Backblaze Storage Performance</h3><p id="1cbe0e14-49bc-8048-9908-d88304d37262" class="">
+</p><p id="1cbe0e14-49bc-80e5-911b-d12eef5f9893" class="">Hyper-converged storage via a Ceph cluster offers great flexibility at the cost of performance. </p><p id="1cbe0e14-49bc-8038-a21c-dc9b8fcf83d4" class="">Currently, the Ceph and Backblaze mount performance appears comparable. This is misleading, however. We can easily upgrade our Ceph cluster with better networking to improve its performance 10x. On the other hand, Backblaze is over the internet so our ability to directly improve it is much more limited.</p><p id="1cbe0e14-49bc-806b-9317-cbfd177fd158" class="">The host servers have SATA SSD storage (typically 400-500MB/s throughput). A KVM-based VM can fully utilize this bandwidth when using local storage. However, when using Ceph, gigabit networking limitations (128MB/s theoretical) and network filesystem overhead significantly hinder performance. These limitations can be mitigated with improved hardware.</p><p id="1cbe0e14-49bc-80dd-98f5-cc5a17a9f369" class="">Further research is needed to quantify the potential improvements gained by deploying a more suitable 10 gigabit+ network or using NVME SSD servers.</p><p id="1cbe0e14-49bc-8098-b11f-fad9bf765d89" class="">
+</p><figure id="1cbe0e14-49bc-80ec-aa9a-c8757dc455a8" class="image"><a href="report-assets/comparison.png"><img style="width:710px" src="report-assets/comparison.png"/></a></figure><p id="1cbe0e14-49bc-80ab-b381-c5fbbcc3f529" class="">
+</p><p id="1cbe0e14-49bc-80fc-9d28-c6545784910c" class="">Random write/read data could not be collected for Backblaze mount because <code>fio</code> encountered errors when running tests on the mounted directory. This is typical of the kind of rough edges that occur when using a S3-like object store as a POSIX file system. The author’s guess is that the random read/write performance for Backblaze is going to be quite terrible.</p><p id="1cbe0e14-49bc-808b-8766-fae71828aa2e" class="">
+</p><h2 id="1cbe0e14-49bc-8034-bb70-fa1d50b59aff" class="">Cost Considerations</h2><p id="1cbe0e14-49bc-8023-95f9-e4d4a6a1cc32" class="">While a detailed cost projection and optimization for a fully scaled system is beyond the scope of this report, we can offer some constraints and recommendations based on the current technology stack.</p><p id="1cbe0e14-49bc-8050-9f7d-e4dbab560496" class="">Proxmox and Ceph clusters benefit significantly from a fast network. Scaleway CORE offers machines with 25 Gbps, making them a suitable choice. Servers with less than 10 Gbps should be avoided.</p><p id="1cbe0e14-49bc-808d-9a57-ee9eb57eccd5" class="">Although there is no theoretical limit to the size of Proxmox clusters, larger clusters may experience increased overhead and instability. Therefore, keeping it below 10 is considered a safe rule of thumb. To host 1000 total VM users, each server will need to be quite powerful (with 100+ logical cores). Beyond that, a multi-cluster setup should be considered.</p><p id="1cbe0e14-49bc-80d7-848b-f366237122a2" class="">If we want to offer lots of within-cluster storage, we can add Scaleway STORE servers seamlessly into the Ceph cluster. The hyper-converged architecture makes such configurations essentially plug-and-play.</p><h2 id="1cbe0e14-49bc-80a2-b59f-edac526c0698" class="">Clustering &amp; Redundancy</h2><p id="1cbe0e14-49bc-80c5-ae90-c130c2a2c4e4" class="">Currently, with three-way replication for redundancy, our three 256GB SSDs provide only 256GB of usable Ceph RBD storage. This represents a worst-case scenario; adding more drives will significantly improve the usable capacity ratio.</p><h2 id="1cbe0e14-49bc-8091-95bb-c96035c101d3" class="">Upkeep Cost</h2><p id="1cbe0e14-49bc-803d-b2a3-e304f1dadfcc" class="">Proxmox software and its full functionality are available free of charge. The primary upkeep cost is the hardware rental. Proxmox offers optional &#x27;Enterprise Plans,&#x27; recommended for production environments, which provide enterprise-level engineering support.</p><h2 id="1cbe0e14-49bc-80e4-a39a-fab05b7b8e7c" class="">Dependencies and Maintenance</h2><p id="1cbe0e14-49bc-8080-88d2-dbcb23c7d6a1" class="">The POC relies on very popular open source software with well-defined governance and historical reliability. There are very few dependencies or maintenance items besides updating the Proxmox hypervisor and the Debian-based image.</p><h1 id="1cbe0e14-49bc-80c8-8201-d5b9ca3a9a90" class="">Next Steps</h1><h2 id="1cbe0e14-49bc-80e7-9a9a-d456ccf33bae" class="">Application Performance Testing</h2><p id="1cbe0e14-49bc-806e-a318-fe681f7cd8f9" class="">Further testing is required to ensure that all end-user applications properly utilize newly allocated resources without requiring a system reboot. While most multi-threaded processes will seamlessly adapt to additional cores, some single-threaded legacy applications may not.</p><h2 id="1cbe0e14-49bc-8047-8733-ec8429aa5e09" class="">Full Infrastructure-As-Code (IaC)</h2><p id="1cbe0e14-49bc-801c-a2b3-d94f93dfd5fd" class="">The goal of IaC is to provision infrastructure automatically and declaratively by writing code instead of manual configuration. In parts of the ‘Setup’ section, manual web UI based methods were shown for convenience and for better intuition. Further development work is needed to bring the whole process into IaC. The following diagram highlights areas (yellow) where IaC remains to be implemented. Proxmox provides a comprehensive API, so this task is not expected to encounter any feasibility barriers.[4]</p><p id="1cbe0e14-49bc-80c6-a060-c26cb2427a56" class="">
+</p><figure id="1cbe0e14-49bc-803c-9b86-d46e2b1050fb" class="image"><a href="report-assets/ias-readiness.png"><img style="width:709.9921875px" src="report-assets/ias-readiness.png"/></a></figure><p id="1cbe0e14-49bc-8096-8feb-ca9cd1e0a1a9" class="">
+</p><h2 id="1cbe0e14-49bc-8010-ac33-c3394c1d6432" class="">Thin Provisioning through Usage Analysis</h2><p id="1cbe0e14-49bc-8063-bc86-c5fe939700e3" class="">Thin provisioning involves allocating more storage or CPU resources to customers than are physically available, based on the assumption that users will not simultaneously exhaust their allocated resources.</p><p id="1cbe0e14-49bc-8039-b59c-c7a7f9c06a4f" class="">Further analysis is required to determine an appropriate safety margin for implementing this cost optimization strategy.</p><h2 id="1cbe0e14-49bc-80a7-9092-fe88dc433e23" class="">Metering &amp; Billing System</h2><p id="1cbe0e14-49bc-80c4-829d-e24a63a618bc" class="">Development of a metering and billing system that can accurately track the dynamic resource usage as demonstrated here is key for future work, including identifying metrics and implementing a billing engine. Integration with the Proxmox API to programmatically access VM metadata will facilitate this task.</p><h2 id="1cbe0e14-49bc-8005-88ea-ddf9c0a75155" class="">VM Isolation and Network Hardening</h2><p id="1cbe0e14-49bc-809b-9cc4-db85987dc971" class="">Currently, basic levels of inter-VM isolation is already in place. However, more security analysis and penetration testing is required to ensure that VM isolation cannot be broken.</p><h2 id="1cbe0e14-49bc-8055-8644-fe4cabaea8d0" class="">Autoscaling</h2><p id="1cbe0e14-49bc-8066-bf31-ec52c4cf8f1f" class="">Currently, VM migration for resource optimization is a manual process. Several third-party solutions aim to address this: <a href="https://github.com/gyptazy/ProxLB">ProxLB</a> automates VM migration based on dynamic resource usage, while <a href="https://github.com/fabriziosalmi/proxmox-vm-autoscale">proxmox-vm-autoscale</a> dynamically adjusts VM resources based on CPU/RAM utilization. Further investigation and evaluation are needed to determine the optimal implementation strategy for these solutions.</p><p id="1cbe0e14-49bc-806e-888c-d794fab7be3f" class="">
+</p><h2 id="1cbe0e14-49bc-805f-ab12-f0ea4ba3fd56" class="">Further Questions</h2><h3 id="1cbe0e14-49bc-80fd-8a08-ce2fa77ca4cb" class="">Orthogonality of Vertical Scaling</h3><figure id="1cbe0e14-49bc-805e-a9c3-df0093d1a7a6" class="image"><a href="report-assets/orthogonal-resources.png"><img style="width:240px" src="report-assets/orthogonal-resources.png"/></a></figure><p id="1cbe0e14-49bc-8012-9195-c86de69a9861" class="">To what extent will we allow customers to independently scale CPU, RAM, and storage? Will we offer unrestricted combinations of these resources, pre-set ratios, or flexibility within defined ranges?</p><p id="1cbe0e14-49bc-80d9-8023-e98b47451d0c" class="">These considerations are important because mismatches between aggregate customer resource demands and the cluster’s aggregate physical resource ratios can lead to inefficiencies.</p><p id="1cbe0e14-49bc-801c-8343-d6c3bb15df9b" class="">
+</p><h3 id="1cbe0e14-49bc-80d3-bf18-fe75cc52dac4" class="">Terms &amp; Quality of Service</h3><p id="1cbe0e14-49bc-800d-87f5-f35cf5714122" class="">Our results demonstrate near-zero downtime vertical scaling within our POC cluster, with the exception of cross-host migrations. Moving forward, we need to define and communicate our Quality of Service (QoS) policy to customers: Should VM migrations be limited to instances where customers request resource changes, or can we also migrate VMs proactively to optimize infrastructure costs? Further discussion is needed to determine the appropriate balance between fairness, predictability, and cost optimization.</p><h1 id="1cbe0e14-49bc-80f4-97f9-e6e14970ac41" class="">Resources</h1><p id="1cbe0e14-49bc-804a-8eac-ee8792f1ac62" class="">[1] <a href="https://docs.openstack.org/nova/latest//user/resize">https://docs.openstack.org/nova/latest//user/resize</a> </p><p id="1cbe0e14-49bc-8010-8a95-dbd0244af086" class="">[2] <a href="https://bugs.launchpad.net/nova/+bug/2017829#:~:text=I%20understand%20that%20openstack%20doesn%27t,it%20possible%20to%20support%20it">https://bugs.launchpad.net/nova/+bug/2017829#:~:text=I understand that openstack doesn&#x27;t,it possible to support it</a></p><p id="1cbe0e14-49bc-806e-b710-f73463c02894" class="">[3] <a href="https://pve.proxmox.com/pve-docs/chapter-pvecm.html">https://pve-proxmox.com/pve-docs/chapter-pvecm.html</a></p><p id="1cbe0e14-49bc-80e8-acfe-cbe87fc321f0" class="">[4] <a href="https://pve.proxmox.com/pve-docs/api-viewer">https://pve.proxmox.com/pve-docs/api-viewer</a></p><p id="1cbe0e14-49bc-8038-bd73-e5615cdfe960" class="">[5] <a href="https://pve.proxmox.com/wiki/Hotplug_(qemu_disk,nic,cpu,memory)">https://pve.proxmox.com/wiki/Hotplug_(qemu_disk,nic,cpu,memory)</a></p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

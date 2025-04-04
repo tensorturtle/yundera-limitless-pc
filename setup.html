@@ -1,0 +1,771 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>“Zero to Demo” - Limitless PC Proxmox Setup</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1cbe0e14-49bc-8030-a6bc-e8d080d4ce89" class="page sans"><header><h1 class="page-title">“Zero to Demo” - Limitless PC Proxmox Setup</h1><p class="page-description"></p></header><div class="page-body"><p id="1cbe0e14-49bc-81ba-81ee-ef285d192da0" class="">
+</p><h1 id="1cbe0e14-49bc-811e-b8a5-c6e6e3a5bc0b" class="">Create Developer SSH Key</h1><p id="1cbe0e14-49bc-81ea-9618-c2a23578eb68" class="">On your Mac or Linux machine:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-8123-9b74-e676070cf6f0" class="code"><code class="language-Bash">ssh-keygen -C &quot;admin@aptero.co&quot;</code></pre><p id="1cbe0e14-49bc-81f1-bfe8-f7f3ba361e6b" class="">It will ask:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-8118-b262-eb330358e28a" class="code"><code class="language-Bash">Generating public/private ed25519 key pair.
+Enter file in which to save the key:</code></pre><p id="1cbe0e14-49bc-81f5-9df4-fd6581de4a24" class="">Name the key pair something memorable like <code>yundera-developer</code> </p><p id="1cbe0e14-49bc-81bf-9a02-c3ecb849653a" class="">Passphrase is optional but recommended.</p><p id="1cbe0e14-49bc-81ec-83bd-e07a6928a817" class="">This will create two files in <code>~/.ssh:</code></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-81b7-a37f-eabd0c01fb48" class="code"><code class="language-Bash">yundera-developer
+yundera-developer.pub</code></pre><p id="1cbe0e14-49bc-8130-b53c-da2e96139ad8" class="">The *.pub file is the public key that you need to upload to Scaleway and attach to your server when you create the server.</p><p id="1cbe0e14-49bc-8143-bfa1-ec3b48fca672" class="">The file without the *.pub extension is the private key.</p><h1 id="1cbe0e14-49bc-818e-952b-f35d17c9c6c1" class="">Rent Servers</h1><p id="1cbe0e14-49bc-8145-b453-fb6a90979186" class="">Rent three Scaleway Dedibox START-2-L servers.</p><p id="1cbe0e14-49bc-81fc-b85e-e709871d7360" class="">This section does not have an automated playbook because Scaleway Dedibox rental is a month-long commnitment and initial OS install can take up to 1 hour. These considerations made it infeasible to build and test automated scripts within the scope of this report.</p><p id="1cbe0e14-49bc-815a-b23a-fa3c7340f2ad" class="">Should that become a relevant goal, Scaleway offers its own APIs and the Terraform has a Scaleway provider already built-in, which will make the task straightforward.</p><p id="1cbe0e14-49bc-8120-ab04-efd9bce82a5d" class="">
+</p><p id="1cbe0e14-49bc-8194-bd8b-d0e3c11a908e" class="">Sign into <a href="https://console.online.net/en/login">https://console.online.net/en/login</a></p><figure id="1cbe0e14-49bc-810c-9476-ed342167d70f" class="image"><a href="setup-assets/Screenshot_2025-03-27_at_14.12.54.png"><img style="width:2248px" src="setup-assets/Screenshot_2025-03-27_at_14.12.54.png"/></a></figure><p id="1cbe0e14-49bc-819b-84ae-de69cb624541" class="">Since the latest version of Proxmox VE that Scaleway offers pre-installed is an outdated (7.x) one, we will install Proxmox VE 8.x ourselves from a Debian 11 base installation. In the process we’ll upgrade Debian from 11 to 12 also.</p><figure id="1cbe0e14-49bc-81a1-909b-d3d9e0cd448d" class="image"><a href="setup-assets/Screenshot_2025-03-27_at_14.16.31.png"><img style="width:720px" src="setup-assets/Screenshot_2025-03-27_at_14.16.31.png"/></a></figure><figure id="1cbe0e14-49bc-8141-92e5-e6df8b0f1edc" class="image"><a href="setup-assets/Screenshot_2025-03-29_at_00.21.44.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-29_at_00.21.44.png"/></a></figure><p id="1cbe0e14-49bc-8155-9ab7-de1a6b40f41d" class="">The default partitioning uses RAID1. We need to have one of the drives dedicated for Ceph storage. Therefore, change the partition to not use RAID. On the first drive, keep the Swap, /boot, and / partitions. On the second drive, replace everything with a single ext4 partition. For now we’ll mount that drive at /data but this path doesn’t matter since we will be wiping this drive later on.</p><figure id="1cbe0e14-49bc-81cb-a407-c311a6394c8a" class="image"><a href="setup-assets/Screenshot_2025-03-30_at_02.33.30.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-30_at_02.33.30.png"/></a></figure><p id="1cbe0e14-49bc-8135-a0b0-f09cba0ea85e" class="">Change the hostname to something more meaningful. Pick a username and password and keep them somewhere safe.</p><figure id="1cbe0e14-49bc-81f6-ac34-d47c98704885" class="image"><a href="setup-assets/Screenshot_2025-03-29_at_00.25.44.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-29_at_00.25.44.png"/></a></figure><p id="1cbe0e14-49bc-8101-8be2-f078aaf5be0d" class="">In addition, we need to set up SSH key access to the server. Click <code>or add a new one here</code> button. Copy the contents of the public SSH key (<code>yundera-developer.pub</code> in the previous step) here.</p><figure id="1cbe0e14-49bc-8187-8b86-eb46a998b1a3" class="image"><a href="setup-assets/Screenshot_2025-03-29_at_00.25.36.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-29_at_00.25.36.png"/></a></figure><p id="1cbe0e14-49bc-8194-884e-fb2cdaf441fc" class="">Confirm in summary and wait until the servers boot up and installs the OS. The website says this can take up to an hour. Typically it takes around 15 to 30 minutes.</p><p id="1cbe0e14-49bc-8145-a5ea-cd803f64e937" class="">
+</p><p id="1cbe0e14-49bc-81ab-80c2-ea147ba9a23e" class="">Repeat this for all servers.</p><h1 id="1cbe0e14-49bc-816c-ae38-f709a1b86f0b" class="">Install Proxmox VE 8</h1><p id="1cbe0e14-49bc-817f-9f18-eae9064d8ff0" class="">We use Ansible to automate the installation and upgrade of Proxmox VE 8.</p><p id="1cbe0e14-49bc-81c6-82bd-c45a7b2105f8" class="">We prefer starting from a Debian image instead of using the provided Proxmox VE 7 image because it allows us to use Ansible for more things.</p><p id="1cbe0e14-49bc-813b-9ecf-cceae62b084d" class="">This code for this section is:</p><figure id="1cbe0e14-49bc-805f-8f5c-ffe0d541f2e4"><div class="source">https://github.com/tensorturtle/yundera-limitless-pc</div></figure><p id="1cbe0e14-49bc-8168-9271-f891f8525236" class="">Please read the ‘README.md’ inside the ‘ansible’ directory.</p><p id="1cbe0e14-49bc-8188-a146-c2bbc75ee80d" class="">Ansible running on all three servers:</p><figure id="1cbe0e14-49bc-8193-be09-ea727ccc10bb" class="image"><a href="setup-assets/Screenshot_2025-03-29_at_22.56.33.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-29_at_22.56.33.png"/></a></figure><p id="1cbe0e14-49bc-811e-b043-f691a311da3a" class="">Once Ansible is finished, navigate to the web interface, which is at port 8006 on each of the servers’ public IP addresses:</p><p id="1cbe0e14-49bc-8174-a2c9-c27fa8da3e84" class="">Proxmox uses self-signed certificates which web browsers don’t like - we can safely ignore this and it won’t bother us again.</p><figure id="1cbe0e14-49bc-81eb-9df3-f929b9a0f36c" class="image"><a href="setup-assets/Screenshot_2025-03-29_at_02.27.15.png"><img style="width:709.96875px" src="setup-assets/Screenshot_2025-03-29_at_02.27.15.png"/></a></figure><figure id="1cbe0e14-49bc-8162-a2e2-da0d62bab859" class="image"><a href="setup-assets/Screenshot_2025-03-29_at_02.27.21.png"><img style="width:709.96875px" src="setup-assets/Screenshot_2025-03-29_at_02.27.21.png"/></a></figure><p id="1cbe0e14-49bc-81ef-9a5e-d301b0b62d52" class="">Log in using the root password (which you defined when renting the server)</p><figure id="1cbe0e14-49bc-81ef-b243-cc16a2fb7d96" class="image"><a href="setup-assets/Screenshot_2025-03-29_at_02.28.31.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-29_at_02.28.31.png"/></a></figure><p id="1cbe0e14-49bc-8171-92aa-c26378d45cef" class="">Ignore warning for subscription.</p><figure id="1cbe0e14-49bc-8138-84df-e59dee2b89f2" class="image"><a href="setup-assets/Screenshot_2025-03-29_at_02.29.36.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-29_at_02.29.36.png"/></a></figure><figure id="1cbe0e14-49bc-81a8-b0bd-cdf772699562" class="image"><a href="setup-assets/Screenshot_2025-03-29_at_02.48.43.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-29_at_02.48.43.png"/></a></figure><p id="1cbe0e14-49bc-818c-aa1b-ccd85046db66" class="">At this point, we should be able to access all three Proxmox web UIs.</p><h1 id="1cbe0e14-49bc-810e-9204-e84b2827dccd" class="">Create Proxmox Cluster</h1><p id="1cbe0e14-49bc-8125-ae6f-e7f2eda61db1" class="">This step cannot be automated via Ansible due to a quirk of the ‘pvecm’ command - specifically, it requires the root password to be entered (even when key-based SSH is set up between the servers) but it cannot be scripted with STDIN or even ‘expect’. More work is required to find a workaround.</p><p id="1cbe0e14-49bc-8183-b97c-fbaa7e47f564" class="">Log into the first of the three hosts. We should see a single host in the ‘Datacenter’ list.</p><figure id="1cbe0e14-49bc-819d-a95d-df184a42f271" class="image"><a href="setup-assets/Screenshot_2025-03-29_at_12.27.08.png"><img style="width:710px" src="setup-assets/Screenshot_2025-03-29_at_12.27.08.png"/></a></figure><p id="1cbe0e14-49bc-811d-b606-e370fb234817" class="">Create a new cluster.</p><figure id="1cbe0e14-49bc-8184-88ca-ffa58a05de24" class="image"><a href="setup-assets/Screenshot_2025-03-29_at_12.32.04.png"><img style="width:710px" src="setup-assets/Screenshot_2025-03-29_at_12.32.04.png"/></a></figure><p id="1cbe0e14-49bc-81a8-87c2-e3f2ad9572fc" class="">Pick a cluster name of your choice.</p><figure id="1cbe0e14-49bc-8112-9a0d-edb2c41e7d67" class="image"><a href="setup-assets/Screenshot_2025-03-29_at_12.34.00.png"><img style="width:710px" src="setup-assets/Screenshot_2025-03-29_at_12.34.00.png"/></a></figure><p id="1cbe0e14-49bc-8172-94ab-c06477ff6ca1" class="">Copy the “Join Information” field.</p><figure id="1cbe0e14-49bc-81d5-905e-c0855b2a2faa" class="image"><a href="setup-assets/Screenshot_2025-03-29_at_12.34.06.png"><img style="width:710px" src="setup-assets/Screenshot_2025-03-29_at_12.34.06.png"/></a></figure><p id="1cbe0e14-49bc-81dd-acad-f8d4e1b58528" class="">Now log into the Proxmox web UI of the other two hosts.</p><p id="1cbe0e14-49bc-8135-90cf-d1457da593d6" class="">In the same Cluster settings, join the cluster by pasting in the ‘Join Information’ content.</p><figure id="1cbe0e14-49bc-81bd-8710-c5bd6076af84" class="image"><a href="setup-assets/Screenshot_2025-04-04_at_18.06.39.png"><img style="width:2982px" src="setup-assets/Screenshot_2025-04-04_at_18.06.39.png"/></a></figure><p id="1cbe0e14-49bc-81a4-b28b-cc42d3c8b43b" class="">Enter the root password of the first host when prompted.</p><figure id="1cbe0e14-49bc-81a0-bbd0-cd7c949a37da" class="image"><a href="setup-assets/Screenshot_2025-04-04_at_18.06.55.png"><img style="width:709.9921875px" src="setup-assets/Screenshot_2025-04-04_at_18.06.55.png"/></a></figure><h2 id="1cbe0e14-49bc-81bb-b95c-c26050e09568" class="">Using Command Line</h2><p id="1cbe0e14-49bc-815b-8e7e-e5c73b2a20f2" class="">
+</p><p id="1cbe0e14-49bc-8130-8dd9-d2c832fa8b8f" class="">The same process can be done through the command line.</p><p id="1cbe0e14-49bc-81dd-9476-c219b80b1dc6" class="">SSH into the first node (node 0) as root.</p><p id="1cbe0e14-49bc-8103-bd82-d27a81ff73ca" class="">Create a new cluster</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-819b-8cf5-d7e05aff7b3b" class="code"><code class="language-Bash">pvecm create YUNDERACLUSTER</code></pre><p id="1cbe0e14-49bc-814e-8b1d-e8170604628b" class="">View status</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-815c-8aaf-d863ee3ea341" class="code"><code class="language-Bash">pvecm status</code></pre><p id="1cbe0e14-49bc-8199-9490-d812dbb38129" class="">Note the IP address of this ‘leader’.</p><p id="1cbe0e14-49bc-81ff-882d-e1ee7a9b1384" class="">SSH into the other hosts</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-8161-a0b0-d65bd9924070" class="code"><code class="language-Bash">pvecm add LEADER.IP.ADDRESS.HERE</code></pre><p id="1cbe0e14-49bc-8143-a500-c602f7def5b7" class="">Enter root password for the leader.</p><p id="1cbe0e14-49bc-81f9-b433-cebb86b78c8f" class="">Go back to the leader node and run <code>pvecm status</code> to see the new node in the cluster.</p><p id="1cbe0e14-49bc-81c7-b438-dcf1ac5b63f2" class="">The cluster should now look like this (the cluster is visible from all nodes)</p><figure id="1cbe0e14-49bc-8122-9298-cc53cb08554a" class="image"><a href="setup-assets/Screenshot_2025-03-30_at_00.00.52.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-30_at_00.00.52.png"/></a></figure><p id="1cbe0e14-49bc-8142-b9ee-f5cb8cd4dc7c" class="">Equivalently, we can run</p><p id="1cbe0e14-49bc-8163-839d-d235585412b2" class=""><code>pvecm status</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-819f-a6bb-fdb2e00d6917" class="code"><code class="language-Bash">root@proxmox-dev-cluster-0-node-0:~# pvecm status
+Cluster information
+-------------------
+Name:             YUNDERACLUSTER
+Config Version:   3
+Transport:        knet
+Secure auth:      on
+
+Quorum information
+------------------
+Date:             Sat Mar 29 16:02:14 2025
+Quorum provider:  corosync_votequorum
+Nodes:            3
+Node ID:          0x00000001
+Ring ID:          1.d
+Quorate:          Yes
+
+Votequorum information
+----------------------
+Expected votes:   3
+Highest expected: 3
+Total votes:      3
+Quorum:           2
+Flags:            Quorate
+
+Membership information
+----------------------
+    Nodeid      Votes Name
+0x00000001          1 163.172.68.57 (local)
+0x00000002          1 163.172.68.59
+0x00000003          1 163.172.68.106</code></pre><h1 id="1cbe0e14-49bc-81f9-a376-d77230d40b21" class="">Create Ceph Cluster on top of Proxmox Cluster</h1><p id="1cbe0e14-49bc-819e-8cf8-eba55574a2bf" class="">
+</p><figure id="1cbe0e14-49bc-81da-b2d0-ea7eaa82eecf"><a href="https://pve.proxmox.com/wiki/Deploy_Hyper-Converged_Ceph_Cluster" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Deploy Hyper-Converged Ceph Cluster - Proxmox VE</div><div class="bookmark-description">Proxmox VE unifies your compute and storage systems, that is, you can use the same
+physical nodes within a cluster for both computing (processing VMs and
+containers) and replicated storage. The traditional silos of compute and
+storage resources can be wrapped up into a single hyper-converged appliance.
+Separate storage networks (SANs) and connections via network attached storage
+(NAS) disappear. With the integration of Ceph, an open source software-defined
+storage platform, Proxmox VE has the ability to run and manage Ceph storage directly
+on the hypervisor nodes.</div></div><div class="bookmark-href"><img src="https://pve.proxmox.com/favicon.ico" class="icon bookmark-icon"/>https://pve.proxmox.com/wiki/Deploy_Hyper-Converged_Ceph_Cluster</div></div></a></figure><h2 id="1cbe0e14-49bc-8188-b9cf-f766301a462a" class="">Wipe Second Drive</h2><p id="1cbe0e14-49bc-816d-9af0-dafdeae34739" class="">Our servers came installed with two SSDs. </p><p id="1cbe0e14-49bc-817c-b54a-ecea622bd84c" class="">One is used by the host system, and the other will be dedicated to Ceph.</p><p id="1cbe0e14-49bc-819c-a8b5-da5ccfb24b19" class="">Since we had to format it to ext4 in the setup stage, we wipe it again to be used for Ceph.</p><p id="1cbe0e14-49bc-81ad-8abb-e7b7d0bc5145" class="">Go to ‘Disks’ and select the drive that has just one partition. Then click ‘Wipe Disk’.</p><p id="1cbe0e14-49bc-81bf-bb7d-eb15813de6c8" class="">
+</p><figure id="1cbe0e14-49bc-8104-ad20-f99210b0623e" class="image"><a href="setup-assets/Screenshot_2025-03-30_at_05.05.17.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-30_at_05.05.17.png"/></a></figure><h2 id="1cbe0e14-49bc-8164-a82b-f277537ca390" class="">Install Ceph on all machines</h2><figure id="1cbe0e14-49bc-81c4-8ac5-ea19742e4e00" class="image"><a href="setup-assets/Screenshot_2025-03-30_at_05.06.16.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-30_at_05.06.16.png"/></a></figure><p id="1cbe0e14-49bc-81bc-bd23-f3f043f79b66" class="">Select the latest version (squid) and No-subscription</p><figure id="1cbe0e14-49bc-812d-b98b-c4f438ab0a31" class="image"><a href="setup-assets/Screenshot_2025-03-30_at_05.06.40.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-30_at_05.06.40.png"/></a></figure><figure id="1cbe0e14-49bc-81a4-90bf-f1c56795ed1e" class="image"><a href="setup-assets/Screenshot_2025-03-30_at_05.07.49.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-30_at_05.07.49.png"/></a></figure><p id="1cbe0e14-49bc-818b-b2c5-ea0f9b3edabe" class="">Repeat for all servers.</p><h1 id="1cbe0e14-49bc-8163-92f2-cdaa7fd400de" class="">Create Ceph Cluster</h1><p id="1cbe0e14-49bc-81b6-935c-de42890291f1" class="">
+</p><p id="1cbe0e14-49bc-8145-bd8e-f147655c5df3" class="">We’ll have one monitor, three managers (one main, two standby), and three OSDs.</p><p id="1cbe0e14-49bc-819e-bb42-df5ff8aac050" class="">If you are unfamiliar with Ceph terms, please see the <a href="https://docs.ceph.com/en/squid/start/">documentation</a></p><p id="1cbe0e14-49bc-8164-a731-f260a8041cc3" class="">
+</p><p id="1cbe0e14-49bc-8197-9686-d75c78415103" class="">Add another manager:</p><figure id="1cbe0e14-49bc-810a-a4b1-f5421bcaf3a7" class="image"><a href="setup-assets/Screenshot_2025-03-30_at_05.13.46.png"><img style="width:709.96875px" src="setup-assets/Screenshot_2025-03-30_at_05.13.46.png"/></a></figure><p id="1cbe0e14-49bc-8131-932d-c0a78f6c0334" class="">
+</p><p id="1cbe0e14-49bc-8131-b8f2-c8380b3f42e3" class="">Add OSD for each server:</p><figure id="1cbe0e14-49bc-81ba-9586-e734133c9d6b" class="image"><a href="setup-assets/Screenshot_2025-03-30_at_05.11.16.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-30_at_05.11.16.png"/></a></figure><p id="1cbe0e14-49bc-8162-b3a7-cda1f27e493c" class="">Create Metadata servers (one active, two standby). Then, create a CephFS storage. CephFS storage is a simple shared file system among the nodes. We will use it to store the VM image base ISOs.</p><figure id="1cbe0e14-49bc-81e5-ba9a-e15d363cd927" class="image"><a href="setup-assets/Screenshot_2025-03-30_at_05.30.36.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-30_at_05.30.36.png"/></a></figure><p id="1cbe0e14-49bc-81e1-ae1d-d2e5e1497c3f" class="">Create a new pool for RBD, which is where the VMs will store their state. </p><p id="1cbe0e14-49bc-815e-b09d-d22aaa0d8073" class="">Note: All Ceph related changes are shared across all nodes, so we can do these operations from any node’s Proxmox web UI.</p><p id="1cbe0e14-49bc-815d-b2ef-e3f00299bde5" class="">Note that CephFS storage is different from the Ceph RBD storage we defined above. CephFS is just a convenient shared directory to keep metadata like OS ISOs, and RBD is where the actual VMs will store their content.</p><p id="1cbe0e14-49bc-8148-ba08-db2c068d45ac" class="">
+</p><p id="1cbe0e14-49bc-81a4-ab86-c954823a1a19" class="">First, create a Ceph pool. Keep defaults.</p><figure id="1cbe0e14-49bc-8193-a063-f54a5b2f7387" class="image"><a href="setup-assets/Screenshot_2025-03-30_at_14.23.29.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-30_at_14.23.29.png"/></a></figure><p id="1cbe0e14-49bc-8106-b974-e768664e79a7" class="">Go to Datacenter → Storage, and add a new “RBD” storage, using cephpool.</p><figure id="1cbe0e14-49bc-81a9-ab62-e50a921e9f89" class="image"><a href="setup-assets/Screenshot_2025-03-30_at_14.25.41.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-03-30_at_14.25.41.png"/></a></figure><h2 id="1cbe0e14-49bc-81f6-acb1-c3db50dc0f20" class="">Configure network for VMs</h2><p id="1cbe0e14-49bc-818c-8c36-d7fb17475a3b" class="">
+</p><p id="1cbe0e14-49bc-81f6-a0dc-efeadce44893" class="">Follow the directions given this Proxmox documentation, starting from the ‘<strong>Configuration’ </strong>section.</p><p id="1cbe0e14-49bc-81eb-8f81-dc1439ed9250" class=""><a href="https://pve.proxmox.com/wiki/Setup_Simple_Zone_With_SNAT_and_DHCP">https://pve.proxmox.com/wiki/Setup_Simple_Zone_With_SNAT_and_DHCP</a></p><p id="1cbe0e14-49bc-81e4-9d31-d27b1466eb56" class="">Notes:</p><ul id="1cbe0e14-49bc-8159-949d-e49cf35dbc39" class="bulleted-list"><li style="list-style-type:disc">The first part, installing <code>dnsmasq</code> , is not necessary because it is already done by the initial Ansible setup.</li></ul><ul id="1cbe0e14-49bc-81bb-b15d-daf910bf84f9" class="bulleted-list"><li style="list-style-type:disc">When defining the subnet, consider using a larger subnet mask like /16 to allow for a bigger network, such as: <figure id="1cbe0e14-49bc-81d9-8910-c9ec7a6375fb" class="image"><a href="setup-assets/Screenshot_2025-04-04_at_18.20.19.png"><img style="width:2982px" src="setup-assets/Screenshot_2025-04-04_at_18.20.19.png"/></a></figure><figure id="1cbe0e14-49bc-8131-a064-f7a5523a4391" class="image"><a href="setup-assets/Screenshot_2025-04-04_at_18.21.15.png"><img style="width:2982px" src="setup-assets/Screenshot_2025-04-04_at_18.21.15.png"/></a></figure></li></ul><ul id="1cbe0e14-49bc-8135-8764-c0ee5468037f" class="bulleted-list"><li style="list-style-type:disc">IP forwarding is required, which is done by: <code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward</code>  This was already applied in the initial Ansible playbooks, so we don’t have to worry about it</li></ul><ul id="1cbe0e14-49bc-8166-a002-dd645de28b26" class="bulleted-list"><li style="list-style-type:disc">Remember to ‘Apply’ changes from the ‘SDN’ view.</li></ul><h1 id="1cbe0e14-49bc-81fc-b7eb-caa5d8352d87" class="">Create a VM</h1><h2 id="1cbe0e14-49bc-8160-9b2b-e46fb7a0db0a" class="">Download OS ISOs</h2><p id="1cbe0e14-49bc-8156-aff8-c74c6dc273a6" class="">Upload a Ubuntu 24.04 LTS image to the CephFS storage. Since that storage is shared, it means that all hosts within this cluster will be able to launch VMs using that ISO.</p><p id="1cbe0e14-49bc-81e4-aec4-e5723b1ccce5" class="">
+</p><p id="1cbe0e14-49bc-81ab-8ac2-d3ae4b89c05b" class="">From France, a convenient download URL mirror is: <a href="https://mirror.bakertelekom.fr/Ubuntu/24.04/ubuntu-24.04.2-desktop-amd64.iso">https://mirror.bakertelekom.fr/Ubuntu/24.04/ubuntu-24.04.2-desktop-amd64.iso</a></p><figure id="1cbe0e14-49bc-81f6-942b-ca5d13939f96" class="image"><a href="setup-assets/Screenshot_2025-04-04_at_18.23.18.png"><img style="width:2982px" src="setup-assets/Screenshot_2025-04-04_at_18.23.18.png"/></a></figure><p id="1cbe0e14-49bc-8129-a9ae-f396e1d4ebaf" class="">Upload it to the CephFS. Since it’s a shared storage location, now all hosts will be able to create VMs based on this ISO without copying.</p><figure id="1cbe0e14-49bc-8111-9418-cbf3a31dcb12" class="image"><a href="setup-assets/Screenshot_2025-04-02_at_17.51.30.png"><img style="width:709.9921875px" src="setup-assets/Screenshot_2025-04-02_at_17.51.30.png"/></a></figure><h2 id="1cbe0e14-49bc-81ca-8bd0-e543c3237269" class="">Create VM</h2><p id="1cbe0e14-49bc-8148-b718-e38053230294" class="">Press ‘Create VM’ button</p><figure id="1cbe0e14-49bc-81d6-af3d-c29f11308cb4" class="image"><a href="setup-assets/Screenshot_2025-04-04_at_18.37.22.png"><img style="width:2982px" src="setup-assets/Screenshot_2025-04-04_at_18.37.22.png"/></a></figure><p id="1cbe0e14-49bc-812d-9136-dc2b4f44aac0" class="">Use the previously uploaded ISO in cephfs:</p><figure id="1cbe0e14-49bc-8100-a6b0-cbead55ce114" class="image"><a href="setup-assets/Screenshot_2025-04-04_at_18.37.33.png"><img style="width:2982px" src="setup-assets/Screenshot_2025-04-04_at_18.37.33.png"/></a></figure><p id="1cbe0e14-49bc-81cb-9386-c17841c4e8a9" class="">In System, select ‘Qemu Agent’</p><figure id="1cbe0e14-49bc-81cc-955f-e5a9f46653b5" class="image"><a href="setup-assets/Screenshot_2025-04-02_at_17.56.34.png"><img style="width:2634px" src="setup-assets/Screenshot_2025-04-02_at_17.56.34.png"/></a></figure><p id="1cbe0e14-49bc-81fe-9497-f099b4a26cc3" class="">In Storage, select the Ceph RBD. The disk size is not meaningfully changeable after this, so pick carefully. (More accurately, we can change the disk size but we cannot change the boot partition without rebooting and complex steps)</p><figure id="1cbe0e14-49bc-81ba-8299-dafa93fca3e2" class="image"><a href="setup-assets/Screenshot_2025-04-02_at_17.58.02.png"><img style="width:2634px" src="setup-assets/Screenshot_2025-04-02_at_17.58.02.png"/></a></figure><p id="1cbe0e14-49bc-8141-a87d-e8d6d94c4448" class="">In CPU, enter the maximum number of cores that will ever be used by this VM at the top ‘Cores’. It cannot exceed the number of physical cores on the host.</p><p id="1cbe0e14-49bc-81bd-9167-c31327d26a9c" class=""> Enter the actually allocated number of cores in the bottom ‘VCPUs’.</p><p id="1cbe0e14-49bc-81f7-9bb3-cc897f4328a0" class="">Enable NUMA.</p><figure id="1cbe0e14-49bc-81c4-a718-e84d3c517acf" class="image"><a href="setup-assets/Screenshot_2025-04-02_at_17.58.22.png"><img style="width:709.9921875px" src="setup-assets/Screenshot_2025-04-02_at_17.58.22.png"/></a></figure><p id="1cbe0e14-49bc-81f6-959d-ce24d29bf48b" class="">In Memory, ensure Ballooning Device is selected.</p><figure id="1cbe0e14-49bc-81e8-b525-d5d38f10333f" class="image"><a href="setup-assets/Screenshot_2025-04-02_at_17.59.56.png"><img style="width:2634px" src="setup-assets/Screenshot_2025-04-02_at_17.59.56.png"/></a></figure><p id="1cbe0e14-49bc-813c-a2c0-e2a7a4d4c876" class="">In Network, a vnet created in the above SDN (Software Defined Network) should show up. This can be thought of as an internal network for the VMs, with the Proxmox cluster providing an internet gateway and a DHCP server.</p><p id="1cbe0e14-49bc-811b-9d14-e326e5cefda4" class="">Enable Firewall to disable inter-VM traffic.</p><figure id="1cbe0e14-49bc-81e7-8906-e52a9f614b67" class="image"><a href="setup-assets/Screenshot_2025-04-02_at_18.00.36.png"><img style="width:2634px" src="setup-assets/Screenshot_2025-04-02_at_18.00.36.png"/></a></figure><p id="1cbe0e14-49bc-8119-a5e4-de114592bdc7" class="">Finish VM creation. Don’t start it yet.</p><p id="1cbe0e14-49bc-81eb-81dc-c4ef84c1b74b" class="">Select the newly created VM in the Server View and open Options → Hotplug.</p><figure id="1cbe0e14-49bc-8173-b174-fbebd79af28f" class="image"><a href="setup-assets/Screenshot_2025-04-02_at_18.03.30.png"><img style="width:709.9921875px" src="setup-assets/Screenshot_2025-04-02_at_18.03.30.png"/></a></figure><p id="1cbe0e14-49bc-8156-bb30-df7eede35789" class="">Enable everything including Memory and CPU.</p><p id="1cbe0e14-49bc-81f2-aaee-e1e5c9415219" class="">Now we are ready to install the OS. Press ‘Start’ on this VM and open the Console.</p><p id="1cbe0e14-49bc-814c-af88-f2e22a28cf42" class="">Keep sensible defaults for the OS.</p><p id="1cbe0e14-49bc-81c3-9fc6-dea36dae67f6" class="">Once the OS is installed, we need to make the following system modifications.</p><p id="1cbe0e14-49bc-8122-9636-f45921cdf3ab" class="">
+</p><p id="1cbe0e14-49bc-8102-99c6-cee888c77aff" class="">Install OpenSSH:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-81b7-9696-ce68611d71e4" class="code"><code class="language-Bash">sudo apt install openssh-server
+sudo systemctl start ssh.service</code></pre><p id="1cbe0e14-49bc-814d-9425-c101675c2cb8" class="">These are all just bash commands, so we can do it from the VM’s own terminal, or SSH into it from the host. At this point, the VM doesn’t have an IP address so we won’t be able to SSH into it from outside the cluster.</p><h2 id="1cbe0e14-49bc-81f6-8b07-de3dc2ec9823" class="">Guest VM Modifications for Vertical Scaling</h2><p id="1cbe0e14-49bc-81f1-af10-dded4316ba62" class=""><a href="https://pve.proxmox.com/pve-docs/chapter-qm.html#_vcpu_hot_plug">https://pve.proxmox.com/pve-docs/chapter-qm.html#_vcpu_hot_plug</a></p><p id="1cbe0e14-49bc-81ac-bd55-d9c8f6bd68ba" class="">
+</p><p id="1cbe0e14-49bc-81bd-aa76-c1dd87573692" class="">On ubuntu 24, only one “cpu” line is needed.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-81f4-899c-ce78e3a12376" class="code"><code class="language-Bash">mkdir -p /lib/udev/rules.d/
+echo &#x27;SUBSYSTEM==&quot;cpu&quot;, ACTION==&quot;add&quot;, TEST==&quot;online&quot;, ATTR{online}==&quot;0&quot;, ATTR{online}=&quot;1&quot;&#x27; &gt; /lib/udev/rules.d/80-hotplug-cpu-mem.rules
+</code></pre><p id="1cbe0e14-49bc-8114-aaf8-c64d3636a040" class="">
+</p><p id="1cbe0e14-49bc-8107-981e-fe1d5114f2f2" class="">On Debian 12, the additional line </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-81b2-8f40-ca10cca61cac" class="code"><code class="language-Bash">echo &#x27;SUBSYSTEM==&quot;memory&quot;, ACTION==&quot;add&quot;, TEST==&quot;state&quot;, ATTR{state}==&quot;offline&quot;, ATTR{state}=&quot;online&quot;&#x27; &gt; /lib/udev/rules.d/80-hotplug-cpu-mem.rules</code></pre><p id="1cbe0e14-49bc-81ca-9fdf-ddd1373c6f79" class="">Is required. The <a href="https://pve.proxmox.com/wiki/Hotplug_(qemu_disk,nic,cpu,memory)">https://pve.proxmox.com/wiki/Hotplug_(qemu_disk,nic,cpu,memory)</a> docs say that the memory line is only required for kernel older than 4.7, but on Debian 12 with Kernel 6.1, it was still necessary. If left out, the VM will only see 1GB of RAM.</p><p id="1cbe0e14-49bc-8136-a2cf-c66605186985" class="">
+</p><p id="1cbe0e14-49bc-8191-b33e-ee461543d349" class="">Edit /etc/default/grub</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-81d0-8cea-f73600a4e1d3" class="code"><code class="language-Bash">vi /etc/default/grub</code></pre><p id="1cbe0e14-49bc-81d3-b692-d7bd024696ef" class="">Find the <code><strong>GRUB_CMDLINE_LINUX_DEFAULT</strong></code> line and add <code>movable_node</code></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-81e6-b582-d4d8c268cd7b" class="code"><code class="language-Bash">GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash movable_node&quot;</code></pre><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-81db-a123-d79943d0c814" class="code"><code class="language-Bash">update-grub</code></pre><p id="1cbe0e14-49bc-812d-a24f-d99ad74d2af4" class="">
+</p><p id="1cbe0e14-49bc-8142-8b86-faa57ff27553" class="">Now, we are able to freely scale the CPU and RAM up and down using the Proxmox web GUI → Hardware.</p><p id="1cbe0e14-49bc-81f8-b1c4-e2955d95a4aa" class="">Note that for most system monitoring programs, changes to the CPU count won’t be shown unless you re-open the program. Typically, changes in RAM capacity will show up instantly.</p><p id="1cbe0e14-49bc-81b7-b04e-f94c75b2fd9f" class="">
+</p><p id="1cbe0e14-49bc-819c-ac27-d0a49fa245e1" class="">For convenience, install some commonly used packages that are used later<br/><br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-817e-95c0-d2050d7352cd" class="code"><code class="language-Bash">apt install -y htop vim iperf3 bc rclone</code></pre><p id="1cbe0e14-49bc-8121-9986-dfed04eadcbb" class=""><strong>Clean the image for use as template</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-81f6-b465-d04ad3591a0d" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">apt clean
+
+# Delete temp files
+rm -rf /tmp/*
+rm -rf /var/tmp/*
+
+# Reset machine-id
+truncate -s 0 /etc/machine-id
+rm -f /var/lib/dbus/machine-id
+
+# Remove random seed files
+rm -f /var/lib/systemd/random-seed
+rm -f /loader/random-seed
+
+# Remove system identity files
+rm -f /var/lib/dbus/machine-id
+rm -rf /var/lib/cloud/instances/*
+
+
+# Remove credential secret
+rm -f /var/lib/systemd/credential.secret
+
+# Reset SSH host keys
+rm -f /etc/ssh/ssh_host_*
+</code></pre><p id="1cbe0e14-49bc-8151-b602-c267703df312" class=""><strong>Shutdown</strong> the VM.</p><p id="1cbe0e14-49bc-81c4-b795-d16cfa6151b7" class="">Use the Proxmox GUI to create template using this VM.</p><p id="1cbe0e14-49bc-815b-9f49-dab05bfd9c8c" class="">To use this template, ‘Clone VM Template’ from the VM, instead of ‘Create VM’ at the top of the screen.</p><p id="1cbe0e14-49bc-8135-9f97-f612b9accc03" class="">In the future, we should automate the OS installation process using something like cloud-init.</p><h1 id="1cbe0e14-49bc-81a9-84dc-c243742b28d4" class="">Mount a Backblaze Bucket</h1><p id="1cbe0e14-49bc-81a0-aadc-fad158d88f96" class="">We create a very slightly modified template, starting from the above Ubuntu desktop template. </p><p id="1cbe0e14-49bc-80c6-9b43-cdd00236e57a" class="">Since we deleted the SSH host keys in the previous step for a clean OS, we need to reconfigure it. This needs to be done for new VMs.<br/><br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-805a-9615-f69f5f4cce87" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sudo dpkg-reconfigure openssh-server</code></pre><p id="1cbe0e14-49bc-8015-a3ed-e221c5eb4924" class="">
+</p><p id="1cbe0e14-49bc-8089-889f-cdb08b837804" class="">We simply add a script in the user’s home directory, which can be run once to set up a backblaze mount.</p><figure id="1cbe0e14-49bc-8098-b6c9-f7d6721fa17b"><div class="source">https://github.com/tensorturtle/yundera-limitless-pc/blob/main/backblaze-mount/setup-backblaze-mount.sh</div></figure><p id="1cbe0e14-49bc-8110-bfe0-e564f06240f4" class="">
+</p><p id="1cbe0e14-49bc-81a7-9d80-cb97e33ca5f0" class="">The user should be directed to run this once at the beginning.</p><p id="1cbe0e14-49bc-814e-b796-c7c07607b54e" class="">In Proxmox, a new VM template is created.</p><p id="1cbe0e14-49bc-8118-9047-fe1fed604483" class="">This VM template has full CPU and RAM vertical scalability, along with Backblaze mount setup script.</p><p id="1cbe0e14-49bc-8161-b619-eabfd2130a7c" class="">The Setup process for the POC is now complete. The next section will demonstrate starting up a VM based on the above template and run some experiments to verify the vertical scaling capabilities.</p><h2 id="1cbe0e14-49bc-8056-8e13-ce92f255c177" class="">CasaOS Installation</h2><p id="1cbe0e14-49bc-80e7-bc61-ff0d6ac0335b" class="">On top of the Ubuntu + Backblaze template, we install CasaOS to create the final template.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1cbe0e14-49bc-80c4-bf8f-e3f72c4cd073" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">wget -qO- https://get.casaos.io | sudo bash</code></pre><p id="1cbe0e14-49bc-80a9-b8c3-e2864e4993dd" class="">A demo VM is spun up using this template at</p><p id="1cbe0e14-49bc-80d1-ae49-c3ecfc067e1d" class=""><a href="https://yundera-limitless-pc-demo.tensorturtle.com">https://yundera-limitless-pc-demo.tensorturtle.com</a></p><p id="1cbe0e14-49bc-802e-954c-d440b754ba64" class="">
+</p><p id="1cbe0e14-49bc-80ba-b5bf-f51fa57ac182" class="">Some unique modifications were made to serve as a demo:</p><ul id="1cbe0e14-49bc-80ef-9c9e-f7e336ec64f1" class="bulleted-list"><li style="list-style-type:disc">A demo Backblaze bucket (from Jason Sohn’s Backblaze account) is mounted.</li></ul><ul id="1cbe0e14-49bc-8072-8c2d-dd508857abec" class="bulleted-list"><li style="list-style-type:disc">This VM is connected to Jason Sohn’s personal Tailscale network and reverse proxy server. A similar VPN based setup is required for deployment.</li></ul><figure id="1cbe0e14-49bc-800f-8e92-fba6d67aa179" class="image"><a href="setup-assets/Screenshot_2025-04-05_at_01.22.06.png"><img style="width:709.984375px" src="setup-assets/Screenshot_2025-04-05_at_01.22.06.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
