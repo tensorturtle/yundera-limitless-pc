@@ -4,6 +4,8 @@ Read the [**full report**](https://files.tensorturtle.com/yundera-limitless-pc-d
 
 Read the [**setup documentation**](https://files.tensorturtle.com/yundera-limitless-pc-docs/setup.html). Also available as [Markdown](/docs/SETUP.md) or [PDF](/docs/SETUP.pdf)
 
+![banner](/docs/banner.jpg)
+
 ## Executive Summary
 
 This report outlines the successful development of a proof-of-concept VM that enables **zero-downtime vertical scaling of virtual machines**, a feature currently unavailable on mainstream cloud platforms. Built for Yundera’s user-centric model, the solution leverages open-source technologies (**Proxmox VE** for virtualization and **Ceph** for distributed storage) deployed on bare-metal servers from Scaleway.
