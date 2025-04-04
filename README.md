@@ -1,8 +1,8 @@
 # Yundera Limitless PC
 
-Read the full report: [**Markdown**](/REPORT.md) or [HTML](/REPORT.html) or [PDF](/REPORT.pdf)
+Read the [**full report**](https://files.tensorturtle.com/yundera-limitless-pc-docs/report.html). Also available as [Markdown](/REPORT.md) or [PDF](/REPORT.pdf)
 
-Read the full setup documentation: [**Markdown**](/SETUP.md) or [HTML](/REPORT.html) or [PDF](/SETUP.pdf)
+Read the [**setup documentation**](https://files.tensorturtle.com/yundera-limitless-pc-docs/setup.html). Also available as [Markdown](/SETUP.md) or [PDF](/SETUP.pdf)
 
 ## Executive Summary
 
@@ -11,7 +11,6 @@ This report outlines the successful development of a proof-of-concept VM that en
 The proof of concept demonstrates that computing resources such as CPU, memory, and storage can be dynamically scaled without interrupting user workloads, paving the way for a "limitless PC" experience. Key advantages include lower vendor lock-in, cost-efficiency, and operational flexibility. The project also shows that live migration across servers is not only viable but nearly imperceptible to users.
 
 Based on these findings, the report recommends progressing toward production by implementing infrastructure-as-code, usage-based billing, and enhanced security measures. This positions Yundera to offer a unique, scalable alternative to traditional cloud computing.
-Infrastructure as Code and scripts for Yundera Limitless PC Project
 
 ## Quickstart
 
