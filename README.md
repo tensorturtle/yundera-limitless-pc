@@ -4,7 +4,7 @@
 
 [**Read the full setup documentation**](/SETUP.md)
 
-### Executive Summary
+## Executive Summary
 
 This report outlines the successful development of a proof-of-concept VM that enables **zero-downtime vertical scaling of virtual machines**, a feature currently unavailable on mainstream cloud platforms. Built for Yundera’s user-centric model, the solution leverages open-source technologies (**Proxmox VE** for virtualization and **Ceph** for distributed storage) deployed on bare-metal servers from Scaleway.
 
@@ -12,6 +12,14 @@ The proof of concept demonstrates that computing resources such as CPU, memory, 
 
 Based on these findings, the report recommends progressing toward production by implementing infrastructure-as-code, usage-based billing, and enhanced security measures. This positions Yundera to offer a unique, scalable alternative to traditional cloud computing.
 Infrastructure as Code and scripts for Yundera Limitless PC Project
+
+## Quickstart
+
+The demo CasaOS VM is running at: [https://yundera-limitless-pc-demo.tensorturtle.com/](https://yundera-limitless-pc-demo.tensorturtle.com/)
+
+The Proxmox cluster is running at: [https://163.172.68.57:8006/](https://163.172.68.57:8006/)
+
+Please contact Jason directly for the log in credentials.
 
 ## Subdirectories
 
