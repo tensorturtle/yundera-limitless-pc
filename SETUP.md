@@ -40,25 +40,25 @@ Should that become a relevant goal, Scaleway offers its own APIs and the Terrafo
 
 Sign into [https://console.online.net/en/login](https://console.online.net/en/login)
 
-![Screenshot 2025-03-27 at 14.12.54.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-27_at_14.12.54.png)
+![Screenshot 2025-03-27 at 14.12.54.png](setup-assets/Screenshot_2025-03-27_at_14.12.54.png)
 
 Since the latest version of Proxmox VE that Scaleway offers pre-installed is an outdated (7.x) one, we will install Proxmox VE 8.x ourselves from a Debian 11 base installation. In the process we’ll upgrade Debian from 11 to 12 also.
 
-![Screenshot 2025-03-27 at 14.16.31.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-27_at_14.16.31.png)
+![Screenshot 2025-03-27 at 14.16.31.png](setup-assets/Screenshot_2025-03-27_at_14.16.31.png)
 
-![Screenshot 2025-03-29 at 00.21.44.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-29_at_00.21.44.png)
+![Screenshot 2025-03-29 at 00.21.44.png](setup-assets/Screenshot_2025-03-29_at_00.21.44.png)
 
 The default partitioning uses RAID1. We need to have one of the drives dedicated for Ceph storage. Therefore, change the partition to not use RAID. On the first drive, keep the Swap, /boot, and / partitions. On the second drive, replace everything with a single ext4 partition. For now we’ll mount that drive at /data but this path doesn’t matter since we will be wiping this drive later on.
 
-![Screenshot 2025-03-30 at 02.33.30.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-30_at_02.33.30.png)
+![Screenshot 2025-03-30 at 02.33.30.png](setup-assets/Screenshot_2025-03-30_at_02.33.30.png)
 
 Change the hostname to something more meaningful. Pick a username and password and keep them somewhere safe.
 
-![Screenshot 2025-03-29 at 00.25.44.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-29_at_00.25.44.png)
+![Screenshot 2025-03-29 at 00.25.44.png](setup-assets/Screenshot_2025-03-29_at_00.25.44.png)
 
 In addition, we need to set up SSH key access to the server. Click `or add a new one here` button. Copy the contents of the public SSH key (`yundera-developer.pub` in the previous step) here.
 
-![Screenshot 2025-03-29 at 00.25.36.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-29_at_00.25.36.png)
+![Screenshot 2025-03-29 at 00.25.36.png](setup-assets/Screenshot_2025-03-29_at_00.25.36.png)
 
 Confirm in summary and wait until the servers boot up and installs the OS. The website says this can take up to an hour. Typically it takes around 15 to 30 minutes.
 
@@ -78,25 +78,25 @@ Please read the ‘README.md’ inside the ‘ansible’ directory.
 
 Ansible running on all three servers:
 
-![Screenshot 2025-03-29 at 22.56.33.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-29_at_22.56.33.png)
+![Screenshot 2025-03-29 at 22.56.33.png](setup-assets/Screenshot_2025-03-29_at_22.56.33.png)
 
 Once Ansible is finished, navigate to the web interface, which is at port 8006 on each of the servers’ public IP addresses:
 
 Proxmox uses self-signed certificates which web browsers don’t like - we can safely ignore this and it won’t bother us again.
 
-![Screenshot 2025-03-29 at 02.27.15.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-29_at_02.27.15.png)
+![Screenshot 2025-03-29 at 02.27.15.png](setup-assets/Screenshot_2025-03-29_at_02.27.15.png)
 
-![Screenshot 2025-03-29 at 02.27.21.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-29_at_02.27.21.png)
+![Screenshot 2025-03-29 at 02.27.21.png](setup-assets/Screenshot_2025-03-29_at_02.27.21.png)
 
 Log in using the root password (which you defined when renting the server)
 
-![Screenshot 2025-03-29 at 02.28.31.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-29_at_02.28.31.png)
+![Screenshot 2025-03-29 at 02.28.31.png](setup-assets/Screenshot_2025-03-29_at_02.28.31.png)
 
 Ignore warning for subscription.
 
-![Screenshot 2025-03-29 at 02.29.36.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-29_at_02.29.36.png)
+![Screenshot 2025-03-29 at 02.29.36.png](setup-assets/Screenshot_2025-03-29_at_02.29.36.png)
 
-![Screenshot 2025-03-29 at 02.48.43.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-29_at_02.48.43.png)
+![Screenshot 2025-03-29 at 02.48.43.png](setup-assets/Screenshot_2025-03-29_at_02.48.43.png)
 
 At this point, we should be able to access all three Proxmox web UIs.
 
@@ -106,29 +106,29 @@ This step cannot be automated via Ansible due to a quirk of the ‘pvecm’ comm
 
 Log into the first of the three hosts. We should see a single host in the ‘Datacenter’ list.
 
-![Screenshot 2025-03-29 at 12.27.08.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-29_at_12.27.08.png)
+![Screenshot 2025-03-29 at 12.27.08.png](setup-assets/Screenshot_2025-03-29_at_12.27.08.png)
 
 Create a new cluster.
 
-![Screenshot 2025-03-29 at 12.32.04.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-29_at_12.32.04.png)
+![Screenshot 2025-03-29 at 12.32.04.png](setup-assets/Screenshot_2025-03-29_at_12.32.04.png)
 
 Pick a cluster name of your choice.
 
-![Screenshot 2025-03-29 at 12.34.00.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-29_at_12.34.00.png)
+![Screenshot 2025-03-29 at 12.34.00.png](setup-assets/Screenshot_2025-03-29_at_12.34.00.png)
 
 Copy the “Join Information” field.
 
-![Screenshot 2025-03-29 at 12.34.06.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-29_at_12.34.06.png)
+![Screenshot 2025-03-29 at 12.34.06.png](setup-assets/Screenshot_2025-03-29_at_12.34.06.png)
 
 Now log into the Proxmox web UI of the other two hosts.
 
 In the same Cluster settings, join the cluster by pasting in the ‘Join Information’ content.
 
-![Screenshot 2025-04-04 at 18.06.39.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-04_at_18.06.39.png)
+![Screenshot 2025-04-04 at 18.06.39.png](setup-assets/Screenshot_2025-04-04_at_18.06.39.png)
 
 Enter the root password of the first host when prompted.
 
-![Screenshot 2025-04-04 at 18.06.55.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-04_at_18.06.55.png)
+![Screenshot 2025-04-04 at 18.06.55.png](setup-assets/Screenshot_2025-04-04_at_18.06.55.png)
 
 ## Using Command Line
 
@@ -162,7 +162,7 @@ Go back to the leader node and run `pvecm status` to see the new node in the clu
 
 The cluster should now look like this (the cluster is visible from all nodes)
 
-![Screenshot 2025-03-30 at 00.00.52.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-30_at_00.00.52.png)
+![Screenshot 2025-03-30 at 00.00.52.png](setup-assets/Screenshot_2025-03-30_at_00.00.52.png)
 
 Equivalently, we can run
 
@@ -216,17 +216,17 @@ Since we had to format it to ext4 in the setup stage, we wipe it again to be use
 
 Go to ‘Disks’ and select the drive that has just one partition. Then click ‘Wipe Disk’.
 
-![Screenshot 2025-03-30 at 05.05.17.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-30_at_05.05.17.png)
+![Screenshot 2025-03-30 at 05.05.17.png](setup-assets/Screenshot_2025-03-30_at_05.05.17.png)
 
 ## Install Ceph on all machines
 
-![Screenshot 2025-03-30 at 05.06.16.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-30_at_05.06.16.png)
+![Screenshot 2025-03-30 at 05.06.16.png](setup-assets/Screenshot_2025-03-30_at_05.06.16.png)
 
 Select the latest version (squid) and No-subscription
 
-![Screenshot 2025-03-30 at 05.06.40.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-30_at_05.06.40.png)
+![Screenshot 2025-03-30 at 05.06.40.png](setup-assets/Screenshot_2025-03-30_at_05.06.40.png)
 
-![Screenshot 2025-03-30 at 05.07.49.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-30_at_05.07.49.png)
+![Screenshot 2025-03-30 at 05.07.49.png](setup-assets/Screenshot_2025-03-30_at_05.07.49.png)
 
 Repeat for all servers.
 
@@ -238,15 +238,15 @@ If you are unfamiliar with Ceph terms, please see the [documentation](https://do
 
 Add another manager:
 
-![Screenshot 2025-03-30 at 05.13.46.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-30_at_05.13.46.png)
+![Screenshot 2025-03-30 at 05.13.46.png](setup-assets/Screenshot_2025-03-30_at_05.13.46.png)
 
 Add OSD for each server:
 
-![Screenshot 2025-03-30 at 05.11.16.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-30_at_05.11.16.png)
+![Screenshot 2025-03-30 at 05.11.16.png](setup-assets/Screenshot_2025-03-30_at_05.11.16.png)
 
 Create Metadata servers (one active, two standby). Then, create a CephFS storage. CephFS storage is a simple shared file system among the nodes. We will use it to store the VM image base ISOs.
 
-![Screenshot 2025-03-30 at 05.30.36.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-30_at_05.30.36.png)
+![Screenshot 2025-03-30 at 05.30.36.png](setup-assets/Screenshot_2025-03-30_at_05.30.36.png)
 
 Create a new pool for RBD, which is where the VMs will store their state. 
 
@@ -256,11 +256,11 @@ Note that CephFS storage is different from the Ceph RBD storage we defined above
 
 First, create a Ceph pool. Keep defaults.
 
-![Screenshot 2025-03-30 at 14.23.29.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-30_at_14.23.29.png)
+![Screenshot 2025-03-30 at 14.23.29.png](setup-assets/Screenshot_2025-03-30_at_14.23.29.png)
 
 Go to Datacenter → Storage, and add a new “RBD” storage, using cephpool.
 
-![Screenshot 2025-03-30 at 14.25.41.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-03-30_at_14.25.41.png)
+![Screenshot 2025-03-30 at 14.25.41.png](setup-assets/Screenshot_2025-03-30_at_14.25.41.png)
 
 ## Configure network for VMs
 
@@ -273,9 +273,9 @@ Notes:
 - The first part, installing `dnsmasq` , is not necessary because it is already done by the initial Ansible setup.
 - When defining the subnet, consider using a larger subnet mask like /16 to allow for a bigger network, such as:
     
-    ![Screenshot 2025-04-04 at 18.20.19.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-04_at_18.20.19.png)
+    ![Screenshot 2025-04-04 at 18.20.19.png](setup-assets/Screenshot_2025-04-04_at_18.20.19.png)
     
-    ![Screenshot 2025-04-04 at 18.21.15.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-04_at_18.21.15.png)
+    ![Screenshot 2025-04-04 at 18.21.15.png](setup-assets/Screenshot_2025-04-04_at_18.21.15.png)
     
 - IP forwarding is required, which is done by: `echo 1 > /proc/sys/net/ipv4/ip_forward`  This was already applied in the initial Ansible playbooks, so we don’t have to worry about it
 - Remember to ‘Apply’ changes from the ‘SDN’ view.
@@ -288,29 +288,29 @@ Upload a Ubuntu 24.04 LTS image to the CephFS storage. Since that storage is sha
 
 From France, a convenient download URL mirror is: [https://mirror.bakertelekom.fr/Ubuntu/24.04/ubuntu-24.04.2-desktop-amd64.iso](https://mirror.bakertelekom.fr/Ubuntu/24.04/ubuntu-24.04.2-desktop-amd64.iso)
 
-![Screenshot 2025-04-04 at 18.23.18.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-04_at_18.23.18.png)
+![Screenshot 2025-04-04 at 18.23.18.png](setup-assets/Screenshot_2025-04-04_at_18.23.18.png)
 
 Upload it to the CephFS. Since it’s a shared storage location, now all hosts will be able to create VMs based on this ISO without copying.
 
-![Screenshot 2025-04-02 at 17.51.30.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-02_at_17.51.30.png)
+![Screenshot 2025-04-02 at 17.51.30.png](setup-assets/Screenshot_2025-04-02_at_17.51.30.png)
 
 ## Create VM
 
 Press ‘Create VM’ button
 
-![Screenshot 2025-04-04 at 18.37.22.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-04_at_18.37.22.png)
+![Screenshot 2025-04-04 at 18.37.22.png](setup-assets/Screenshot_2025-04-04_at_18.37.22.png)
 
 Use the previously uploaded ISO in cephfs:
 
-![Screenshot 2025-04-04 at 18.37.33.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-04_at_18.37.33.png)
+![Screenshot 2025-04-04 at 18.37.33.png](setup-assets/Screenshot_2025-04-04_at_18.37.33.png)
 
 In System, select ‘Qemu Agent’
 
-![Screenshot 2025-04-02 at 17.56.34.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-02_at_17.56.34.png)
+![Screenshot 2025-04-02 at 17.56.34.png](setup-assets/Screenshot_2025-04-02_at_17.56.34.png)
 
 In Storage, select the Ceph RBD. The disk size is not meaningfully changeable after this, so pick carefully. (More accurately, we can change the disk size but we cannot change the boot partition without rebooting and complex steps)
 
-![Screenshot 2025-04-02 at 17.58.02.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-02_at_17.58.02.png)
+![Screenshot 2025-04-02 at 17.58.02.png](setup-assets/Screenshot_2025-04-02_at_17.58.02.png)
 
 In CPU, enter the maximum number of cores that will ever be used by this VM at the top ‘Cores’. It cannot exceed the number of physical cores on the host.
 
@@ -318,23 +318,23 @@ In CPU, enter the maximum number of cores that will ever be used by this VM at t
 
 Enable NUMA.
 
-![Screenshot 2025-04-02 at 17.58.22.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-02_at_17.58.22.png)
+![Screenshot 2025-04-02 at 17.58.22.png](setup-assets/Screenshot_2025-04-02_at_17.58.22.png)
 
 In Memory, ensure Ballooning Device is selected.
 
-![Screenshot 2025-04-02 at 17.59.56.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-02_at_17.59.56.png)
+![Screenshot 2025-04-02 at 17.59.56.png](setup-assets/Screenshot_2025-04-02_at_17.59.56.png)
 
 In Network, a vnet created in the above SDN (Software Defined Network) should show up. This can be thought of as an internal network for the VMs, with the Proxmox cluster providing an internet gateway and a DHCP server.
 
 Enable Firewall to disable inter-VM traffic.
 
-![Screenshot 2025-04-02 at 18.00.36.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-02_at_18.00.36.png)
+![Screenshot 2025-04-02 at 18.00.36.png](setup-assets/Screenshot_2025-04-02_at_18.00.36.png)
 
 Finish VM creation. Don’t start it yet.
 
 Select the newly created VM in the Server View and open Options → Hotplug.
 
-![Screenshot 2025-04-02 at 18.03.30.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-02_at_18.03.30.png)
+![Screenshot 2025-04-02 at 18.03.30.png](setup-assets/Screenshot_2025-04-02_at_18.03.30.png)
 
 Enable everything including Memory and CPU.
 
@@ -475,4 +475,4 @@ Some unique modifications were made to serve as a demo:
 - A demo Backblaze bucket (from Jason Sohn’s Backblaze account) is mounted.
 - This VM is connected to Jason Sohn’s personal Tailscale network and reverse proxy server. A similar VPN based setup is required for deployment.
 
-![Screenshot 2025-04-05 at 01.22.06.png](%E2%80%9CZero%20to%20Demo%E2%80%9D%20-%20Limitless%20PC%20Proxmox%20Setup%201cbe0e1449bc8030a6bce8d080d4ce89/Screenshot_2025-04-05_at_01.22.06.png)
+![Screenshot 2025-04-05 at 01.22.06.png](setup-assets/Screenshot_2025-04-05_at_01.22.06.png)
