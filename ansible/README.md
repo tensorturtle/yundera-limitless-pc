@@ -24,7 +24,7 @@ Test that each server is reachable by pinging them:
 ansible all -m ping -i inventory.yaml
 ```
 
-Then, run the playbooks. This will take around 10 minutes.
+Then, run the playbooks. This will take around 15 minutes.
 
 ```
 ansible-playbook -i inventory.yaml all-playbooks.yaml
