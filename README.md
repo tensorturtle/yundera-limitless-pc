@@ -4,7 +4,7 @@ Read the [**full report**](https://files.tensorturtle.com/yundera-limitless-pc-d
 
 Read the [**setup documentation**](https://files.tensorturtle.com/yundera-limitless-pc-docs/setup.html). Also available as [Markdown](/docs/SETUP.md) or [PDF](/docs/SETUP.pdf)
 
-![banner](/docs/banner.jpg)
+![banner](/docs/banner.png)
 
 ## Executive Summary
 
