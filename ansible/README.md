@@ -36,7 +36,7 @@ The ansible playbooks will install Proxmox using the recommended pathway:
 + Install Proxmox VE 7 (according to https://pve.proxmox.com/wiki/Install_Proxmox_VE_on_Debian_11_Bullseye)
 + Upgrade the Debian 11 & Proxmox VE 7 installation to Debian 12 & Proxmox VE 8 (according to https://pve.proxmox.com/wiki/Upgrade_from_7_to_8)
 + Automatically find each machine's public IP and configure the network interface as seen by proxmox. This allows us to immediately set up Proxmox clusters.
-+ Prepare each system so that it is ready to be configured for SNAT (which provides internet access to VMs).
++ Prepare each system so that it is ready to be configured for SNAT (which provides internet access to VMs). Reference: https://pve.proxmox.com/wiki/Setup_Simple_Zone_With_SNAT_and_DHCP
 
 
 
