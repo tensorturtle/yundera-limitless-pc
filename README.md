@@ -1,6 +1,6 @@
 # Yundera Limitless PC
 
-Read the full report: [**Markdown**](/REPORT.md) or [HTML](/report.html) or [PDF](/REPORT.pdf)
+Read the full report: [**Markdown**](/REPORT.md) or [HTML](https://html-preview.github.io/?url=https://github.com/bartaz/impress.js/blob/master/report.html) or [PDF](/REPORT.pdf)
 
 Read the full setup documentation: [**Markdown**](/SETUP.md) or [HTML](/setup.html) or [PDF](/SETUP.pdf)
 
