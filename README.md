@@ -1,8 +1,8 @@
 # Yundera Limitless PC
 
-Read the [**full report**](https://files.tensorturtle.com/yundera-limitless-pc-docs/report.html). Alternative formats: [Markdown](/REPORT.md), [PDF](/REPORT.pdf)
+Read the [**full report**](https://files.tensorturtle.com/yundera-limitless-pc-docs/report.html). Also available as [Markdown](/REPORT.md) or [PDF](/REPORT.pdf)
 
-Read the [**setup documentation**](https://files.tensorturtle.com/yundera-limitless-pc-docs/setup.html). Alternative formats: [Markdown](/SETUP.md), [PDF](/SETUP.pdf)
+Read the [**setup documentation**](https://files.tensorturtle.com/yundera-limitless-pc-docs/setup.html). Also available as [Markdown](/SETUP.md) or [PDF](/SETUP.pdf)
 
 ## Executive Summary
 
