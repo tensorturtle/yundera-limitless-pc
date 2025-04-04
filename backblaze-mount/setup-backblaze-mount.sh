@@ -30,7 +30,7 @@ read -s -p "Enter your Backblaze B2 Application Key (Secret Key): " B2_APP_KEY
 echo ""
 read -p "Enter your Backblaze B2 Bucket Name (e.g., b2-username-bucket): " B2_BUCKET
 REMOTE_NAME="backblaze"
-MOUNT_POINT="/mnt/b2-mount"
+MOUNT_POINT="/DATA/Backblaze_B2"
 
 # Ensure rclone is installed
 if ! command -v rclone &> /dev/null; then
