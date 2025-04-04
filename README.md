@@ -1,6 +1,7 @@
 # Yundera Limitless PC
 
-[**Read the full report**](/REPORT.md)
+[**Read the full report**](/REPORT.md)\
+
 [**Read the full setup documentation**](/SETUP.md)
 
 ### Executive Summary
