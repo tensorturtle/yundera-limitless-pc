@@ -1,0 +1,14 @@
+{
+  "system": "Native Host",
+  "timestamp": "2025-04-01T12:55:18+02:00",
+  "sequential": {
+    "write_MBps": 390.09472656250000000000,
+    "read_MBps": 361.07128906250000000000
+  },
+  "random": {
+    "write_IOPS": 69695.260948,
+    "read_IOPS": 58141.071786,
+    "write_latency_ms": 0.458341489712,
+    "read_latency_ms": 0.549563797261
+  }
+}

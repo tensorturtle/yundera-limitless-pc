@@ -1,0 +1,14 @@
+{
+  "system": "VM with Local Storage",
+  "timestamp": "2025-04-01T12:52:05+02:00",
+  "sequential": {
+    "write_MBps": 329.68359375000000000000,
+    "read_MBps": 366.10644531250000000000
+  },
+  "random": {
+    "write_IOPS": 67096.990301,
+    "read_IOPS": 58453.454655,
+    "write_latency_ms": 0.47579768971200004,
+    "read_latency_ms": 0.546349514129
+  }
+}

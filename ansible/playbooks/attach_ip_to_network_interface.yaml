@@ -1,0 +1,44 @@
+---
+- name: Configure Proxmox network interface eno1
+  hosts: all 
+  become: true
+  gather_facts: no
+
+  tasks:
+    - name: Ensure ipcalc is installed
+      apt:
+        name: ipcalc
+        state: present
+        update_cache: yes
+
+    - name: Get public IP address
+      shell: curl -s ifconfig.me
+      register: public_ip
+      changed_when: false
+
+    - name: Get netmask for public IP
+      shell: |
+        ipcalc {{ public_ip.stdout }} | grep Netmask | awk '{print $2}'
+      register: netmask
+      changed_when: false
+
+    - name: Get gateway for public IP
+      shell: |
+        ipcalc {{ public_ip.stdout }} | grep Network | awk '{print $2}' | cut -d/ -f1 | \
+        awk -F. '{print $1"."$2"."$3".1"}'
+      register: gateway
+      changed_when: false
+
+    - name: Set eno1 interface via pvesh
+      shell: |
+        pvesh set /nodes/$(hostname)/network/eno1 \
+          -type eth \
+          -address {{ public_ip.stdout }} \
+          -netmask {{ netmask.stdout }} \
+          -gateway {{ gateway.stdout }} \
+          -autostart 1
+      args:
+        executable: /bin/bash
+
+          # This is incomplete - right now, you still need to press 'Apply Configuration' for changes to take effect. 
+          # We need to find out what the command for that is

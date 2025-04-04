@@ -1,0 +1,29 @@
+---
+- import_playbook: playbooks/install_proxmox_7.yaml
+- import_playbook: playbooks/upgrade_proxmox_7_to_8.yaml
+- import_playbook: playbooks/attach_ip_to_network_interface.yaml
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: Enable IPv4 forwarding permanently and apply immediately. This is required to fix networking when using SNAT to provide VMs with access to the internet.
+      sysctl:
+        name: net.ipv4.ip_forward
+        value: '1'
+        state: present
+        reload: yes
+
+    - name: Install dnsmasq as part of setting up cluster-level network with Simple zone with SNAT and DHCP.
+      ansible.builtin.apt:
+        name: dnsmasq
+        state: present
+        update_cache: yes
+    - name: Disable and stop dnsmasq
+      systemd:
+        name: dnsmasq
+        enabled: no
+        state: stopped
+        daemon_reload: yes
+
+    - name: Reboot the system
+      ansible.builtin.reboot:

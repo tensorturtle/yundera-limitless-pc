@@ -1,0 +1,42 @@
+# This Ansible playbook upgrades a Debian 11 & Proxmox VE 7 to a Debian 12 & Proxmox 8.
+# The free, no-subscription version is installed.
+# It is presumed that `install-proxmox.yaml` playbook has been run prior to this playbook.
+# The reference documentation is:
+# https://pve.proxmox.com/wiki/Upgrade_from_7_to_8
+---
+- name: Upgrade Proxmox VE from 7 to 8
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Replace 'bullseye' with 'bookworm' in /etc/apt/sources.list
+      ansible.builtin.replace:
+        path: /etc/apt/sources.list
+        regexp: 'bullseye'
+        replace: 'bookworm'
+      become: true
+    - name: Remove Proxmox paid enterprise repository
+      ansible.builtin.file:
+        path: /etc/apt/sources.list.d/pve-enterprise.list
+        state: absent
+    - name: Overwrite Proxmox repo list with no-subscription source
+      copy:
+        dest: /etc/apt/sources.list.d/pve-install-repo.list
+        content: "deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription\n"
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Add Proxmox Ceph no-subscription repo to sources list
+      copy:
+        dest: /etc/apt/sources.list.d/ceph.list
+        content: "deb http://download.proxmox.com/debian/ceph-quincy bookworm no-subscription\n"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Upgrade system to Debian Bookworm and Proxmox VE 8.0 (dist-upgrade)
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: dist
+      become: true
+

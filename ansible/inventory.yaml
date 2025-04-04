@@ -1,0 +1,16 @@
+all:
+  hosts:
+    proxmox_dev_cluster_0_node_0:  # This is the hostname
+      ansible_host: 163.172.68.57 # This is the IP address
+      ansible_user: root      # The user to connect as
+      ansible_private_key_file: ~/.ssh/yundera-developer # SSH Key
+    
+    proxmox_dev_cluster_0_node_1:
+      ansible_host: 163.172.68.59
+      ansible_user: root
+      ansible_private_key_file: ~/.ssh/yundera-developer
+
+    proxmox_dev_cluster_0_node_2:
+      ansible_host: 163.172.68.106
+      ansible_user: root
+      ansible_private_key_file: ~/.ssh/yundera-developer

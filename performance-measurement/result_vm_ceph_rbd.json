@@ -1,0 +1,14 @@
+{
+  "system": "VM with Ceph Cluster",
+  "timestamp": "2025-04-01T12:57:00+02:00",
+  "sequential": {
+    "write_MBps": 25.57128906250000000000,
+    "read_MBps": 96.36718750000000000000
+  },
+  "random": {
+    "write_IOPS": 2998.203593,
+    "read_IOPS": 34545.745425,
+    "write_latency_ms": 10.669698605917999,
+    "read_latency_ms": 0.9242622010210001
+  }
+}

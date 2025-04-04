@@ -1,0 +1,14 @@
+{
+  "system": "VM with Backblaze B2 Mount",
+  "timestamp": "2025-04-01T18:11:19+02:00",
+  "sequential": {
+    "write_MBps": 71.17480468750000000000,
+    "read_MBps": 16.78320312500000000000
+  },
+  "random": {
+    "write_IOPS": "",
+    "read_IOPS": "",
+    "write_latency_ms": "",
+    "read_latency_ms": ""
+  }
+}
