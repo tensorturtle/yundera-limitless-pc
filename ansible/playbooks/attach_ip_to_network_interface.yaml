@@ -5,6 +5,8 @@
   gather_facts: no
 
   tasks:
+
+
     - name: Ensure ipcalc is installed
       apt:
         name: ipcalc

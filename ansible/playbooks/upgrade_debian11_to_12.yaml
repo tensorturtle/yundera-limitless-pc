@@ -1,0 +1,71 @@
+---
+- name: Upgrade Debian 11 to Debian 12
+  hosts: all
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+
+    - name: Ensure system is Debian 11
+      command: lsb_release -c
+      register: release_info
+      changed_when: false
+
+    - name: Fail if not Debian 11
+      fail:
+        msg: "This playbook only supports Debian 11 (bullseye)"
+      when: "'bullseye' not in release_info.stdout"
+
+    - name: Update all current packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Backup current sources.list
+      copy:
+        src: /etc/apt/sources.list
+        dest: /etc/apt/sources.list.bak
+        remote_src: yes
+
+    - name: Replace sources.list for Debian 12
+      copy:
+        content: |
+          deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
+          deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+          deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware
+        dest: /etc/apt/sources.list
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+
+    - name: Perform minimal system upgrade
+      apt:
+        upgrade: safe
+
+    - name: Perform full dist-upgrade
+      apt:
+        upgrade: dist
+
+    - name: Remove unused packages
+      apt:
+        autoremove: yes
+
+    - name: Reboot the system (if required)
+      reboot:
+        msg: "Rebooting after Debian upgrade"
+        connect_timeout: 5
+        reboot_timeout: 600
+        pre_reboot_delay: 5
+        post_reboot_delay: 30
+
+    - name: Confirm new Debian version
+      command: lsb_release -d
+      register: new_release
+
+    - name: Show new Debian version
+      debug:
+        msg: "System upgraded successfully to: {{ new_release.stdout }}"
